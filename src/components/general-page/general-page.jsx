@@ -6,9 +6,7 @@ const GeneralPage = ({title, genre, releaseDate}) => {
   return (
     <React.Fragment>
       <div className="visually-hidden">
-        {/* <!-- inject:svg --> */}
         <svg xmlns="http://www.w3.org/2000/svg" xlinkHref="http://www.w3.org/1999/xlink"><symbol id="add" viewBox="0 0 19 20">
-          {/* <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch --> */}
           <title>+</title>
           <desc>Created with Sketch.</desc>
           <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
@@ -23,14 +21,13 @@ const GeneralPage = ({title, genre, releaseDate}) => {
           <path fillRule="evenodd" clipRule="evenodd" d="M2.40513 5.35353L6.1818 8.90902L15.5807 0L18 2.80485L6.18935 14L0 8.17346L2.40513 5.35353Z" fill="#EEE5B5"/>
         </symbol><symbol id="pause" viewBox="0 0 14 21">
           <symbol id="play-s" viewBox="0 0 19 19"> <path fillRule="evenodd" clipRule="evenodd" d="M0 0L19 9.5L0 19V0Z" fill="#EEE5B5" /> </symbol>
-          {/* <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->  */}
           <title>Artboard</title>
           <desc>Created with Sketch.</desc>
           <g id="Artboard" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
             <polygon id="Line" fill="#EEE5B5" fillRule="nonzero" points="0 -1.11910481e-13 4 -1.11910481e-13 4 21 0 21"/>
             <polygon id="Line" fill="#EEE5B5" fillRule="nonzero" points="10 -1.11910481e-13 14 -1.11910481e-13 14 21 10 21"/>
           </g>
-        </symbol></svg> {/* <!-- endinject --> */}
+        </symbol></svg>
       </div>
 
       <section className="movie-card">
