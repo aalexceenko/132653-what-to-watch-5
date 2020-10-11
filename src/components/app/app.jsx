@@ -12,8 +12,6 @@ import PlayerScreen from "../player-screen/player-screen";
 const App = ({title, genre, releaseDate}) => {
 
   return (
-  // <GeneralPage title={title} genre={genre} releaseDate={releaseDate} />
-
 
     <BrowserRouter>
       <Switch>
