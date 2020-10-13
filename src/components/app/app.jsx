@@ -9,15 +9,18 @@ import MyListScreen from "../my-list-screen/my-list-screen";
 import PlayerScreen from "../player-screen/player-screen";
 
 
-const App = ({title, genre, releaseDate}) => {
+const App = ({films}) => {
+  console.log(films);
 
   return (
 
     <BrowserRouter>
       <Switch>
-        <Route exact path="/">
-          <GeneralPage title={title} genre={genre} releaseDate={releaseDate} />
-        </Route>
+        <Route exact path="/"
+          render={({history}) => (
+            <GeneralPage films={films} onFilmCardClick={(id) => history.push(`/films/${id}`)}/>
+          )}
+        />
         <Route exact path="/login">
           <LoginScreen />
         </Route>
@@ -39,9 +42,25 @@ const App = ({title, genre, releaseDate}) => {
 };
 
 App.propTypes = {
-  title: PropTypes.string.isRequired,
-  genre: PropTypes.string.isRequired,
-  releaseDate: PropTypes.number.isRequired,
+  // title: PropTypes.string.isRequired,
+  // genre: PropTypes.string.isRequired,
+  // releaseDate: PropTypes.number.isRequired,
+  films: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    previewVideo: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+    description: PropTypes.array.isRequired,
+    rating: PropTypes.string.isRequired,
+    ratingText: PropTypes.string.isRequired,
+    votes: PropTypes.number.isRequired,
+    director: PropTypes.string.isRequired,
+    actors: PropTypes.array.isRequired,
+    runtime: PropTypes.number.isRequired,
+    myList: PropTypes.bool.isRequired,
+  })).isRequired,
 };
 
 export default App;
