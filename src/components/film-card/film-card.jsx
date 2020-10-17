@@ -4,13 +4,12 @@ import {Link} from 'react-router-dom';
 
 
 const FilmCard = (props) => {
-  const {film, onFilmCardHover, onFilmCardClick} = props;
+  const {film, onFilmCardClick} = props;
   const {title, previewImage, id} = film;
 
   return (
     <article className="small-movie-card catalog__movies-card"
-      onClick={() => onFilmCardClick(id)}
-      onMouseOver={() => onFilmCardHover(id)}>
+      onClick={() => onFilmCardClick(id)}>
       <div className="small-movie-card__image">
         <img src={previewImage} alt={title} width="280" height="175" />
       </div>
@@ -39,7 +38,6 @@ FilmCard.propTypes = {
     runtime: PropTypes.number.isRequired,
     myList: PropTypes.bool.isRequired,
   }).isRequired,
-  onFilmCardHover: PropTypes.func.isRequired,
   onFilmCardClick: PropTypes.func.isRequired,
 };
 

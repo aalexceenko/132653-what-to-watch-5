@@ -4,8 +4,7 @@ import FilmList from "../film-list/film-list";
 
 const GeneralPage = ({films, onFilmCardClick}) => {
 
-  console.log(films);
-  const {title, year, genre} = films[0];
+  const {title, year, genre, previewImage} = films[0];
 
   return (
     <React.Fragment>
@@ -36,7 +35,7 @@ const GeneralPage = ({films, onFilmCardClick}) => {
 
       <section className="movie-card">
         <div className="movie-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={previewImage} alt={title} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -60,7 +59,7 @@ const GeneralPage = ({films, onFilmCardClick}) => {
         <div className="movie-card__wrap">
           <div className="movie-card__info">
             <div className="movie-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={previewImage} alt={title} width="218" height="327" />
             </div>
 
             <div className="movie-card__desc">
@@ -152,10 +151,6 @@ const GeneralPage = ({films, onFilmCardClick}) => {
 };
 
 GeneralPage.propTypes = {
-  // title: PropTypes.string.isRequired,
-  // genre: PropTypes.string.isRequired,
-  // releaseDate: PropTypes.number.isRequired,
-  // films: PropTypes.array.isRequired,
   films: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,

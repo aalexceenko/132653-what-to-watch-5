@@ -10,7 +10,6 @@ import PlayerScreen from "../player-screen/player-screen";
 
 
 const App = ({films}) => {
-  console.log(films);
 
   return (
 
@@ -27,12 +26,16 @@ const App = ({films}) => {
         <Route exact path="/mylist">
           <MyListScreen />
         </Route>
-        <Route exact path="/films/:id">
-          <FilmScreen />
-        </Route>
-        <Route exact path="/films/:id/review">
-          <AddReviewScreen />
-        </Route>
+        <Route exact path="/films/:id"
+          render={({history, match}) => (
+            <FilmScreen films={films} match={match} onFilmCardClick={(id) => history.push(`/films/${id}`)}/>
+          )}
+        />
+        <Route exact path="/films/:id/review"
+          render={({match}) => (
+            <AddReviewScreen films={films} match={match}/>
+          )}
+        />
         <Route exact path="/player/:id">
           <PlayerScreen />
         </Route>
@@ -42,9 +45,6 @@ const App = ({films}) => {
 };
 
 App.propTypes = {
-  // title: PropTypes.string.isRequired,
-  // genre: PropTypes.string.isRequired,
-  // releaseDate: PropTypes.number.isRequired,
   films: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
