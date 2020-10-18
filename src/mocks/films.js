@@ -3,6 +3,19 @@ import {generateId, getRandomFloat, getRandomArrayItem, getRandomInteger, getRan
 const PREVIEW_VIDEO = `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`;
 const FILM_COUNT = 8;
 const REVIEW_COUNT = 5;
+const VOTES_MAX = 500;
+const RATING_FILM_MAX = 10;
+const RATING_REVIEW_MAX = 5;
+
+const RuntimeMinutes = {
+  MIN: 5,
+  MAX: 180
+};
+
+const ReleaseYear = {
+  MIN: 1900,
+  MAX: 2020,
+};
 
 const TITLES = [
   `21`,
@@ -79,33 +92,29 @@ const RATING_TEXT = [
   `Awesome`,
 ];
 
-const generateFilm = () => {
-  return {
-    id: generateId(),
-    title: getRandomArrayItem(TITLES),
-    genre: getRandomArrayItem(GENRES),
-    previewImage: getRandomArrayItem(POSTER),
-    previewVideo: PREVIEW_VIDEO,
-    year: getRandomInteger(1900, 2000),
-    description: getRandomArrayItems(DESCRIPTION_STRINGS),
-    rating: getRandomFloat(0, 10),
-    ratingText: getRandomArrayItem(RATING_TEXT),
-    votes: getRandomInteger(0, 500),
-    director: getRandomArrayItem(NAMES),
-    actors: getRandomArrayItems(NAMES),
-    runtime: getRandomInteger(5, 180),
-    myList: Boolean(getRandomInteger(0, 1)),
-  };
-};
+const generateFilm = () => ({
+  id: generateId(),
+  title: getRandomArrayItem(TITLES),
+  genre: getRandomArrayItem(GENRES),
+  previewImage: getRandomArrayItem(POSTER),
+  previewVideo: PREVIEW_VIDEO,
+  year: getRandomInteger(ReleaseYear.MIN, ReleaseYear.MAX),
+  description: getRandomArrayItems(DESCRIPTION_STRINGS),
+  rating: getRandomFloat(0, RATING_FILM_MAX),
+  ratingText: getRandomArrayItem(RATING_TEXT),
+  votes: getRandomInteger(0, VOTES_MAX),
+  director: getRandomArrayItem(NAMES),
+  actors: getRandomArrayItems(NAMES),
+  runtime: getRandomInteger(RuntimeMinutes.MIN, RuntimeMinutes.MAX),
+  myList: Boolean(getRandomInteger()),
+});
 
-const generateReview = () => {
-  return {
-    author: getRandomArrayItem(NAMES),
-    rating: getRandomInteger(0, 5),
-    message: getRandomArrayItem(DESCRIPTION_STRINGS),
-    date: generateDate(new Date(2000, 0, 1), new Date()),
-  };
-};
+const generateReview = () => ({
+  author: getRandomArrayItem(NAMES),
+  rating: getRandomInteger(0, RATING_REVIEW_MAX),
+  message: getRandomArrayItem(DESCRIPTION_STRINGS),
+  date: generateDate(new Date(2000, 0, 1), new Date()),
+});
 
 export let films = [];
 export let reviews = [];
