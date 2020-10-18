@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
+import {filmType} from '../../types/film';
 
 
-const FilmCard = (props) => {
-  const {film, onFilmCardClick} = props;
+const FilmCard = ({film, onFilmCardClick}) => {
   const {title, previewImage, id} = film;
 
   return (
@@ -22,22 +22,7 @@ const FilmCard = (props) => {
 };
 
 FilmCard.propTypes = {
-  film: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    previewImage: PropTypes.string.isRequired,
-    previewVideo: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    description: PropTypes.array.isRequired,
-    rating: PropTypes.string.isRequired,
-    ratingText: PropTypes.string.isRequired,
-    votes: PropTypes.number.isRequired,
-    director: PropTypes.string.isRequired,
-    actors: PropTypes.array.isRequired,
-    runtime: PropTypes.number.isRequired,
-    myList: PropTypes.bool.isRequired,
-  }).isRequired,
+  film: filmType,
   onFilmCardClick: PropTypes.func.isRequired,
 };
 
