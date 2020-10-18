@@ -14,33 +14,32 @@ class AddReviewScreen extends React.PureComponent {
       textReview: ``,
     };
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleTextChange = this.handleTextChange.bind(this);
+    this._handleSubmit = this._handleSubmit.bind(this);
+    this._handleTextChange = this._handleTextChange.bind(this);
   }
 
-  handleSubmit(evt) {
+  _handleSubmit(evt) {
     evt.preventDefault();
   }
 
-  handleTextChange(evt) {
-    const text = evt.target.value;
+  _handleTextChange(evt) {
     this.setState({
-      textReview: text,
+      textReview: evt.target.value,
     });
   }
 
-  handleStarClick(checked, index) {
-    const newRatingStarsCheked = Array(5).fill(false);
-    newRatingStarsCheked[index] = checked;
+  _handleStarClick(checked, index) {
+    const newRatingStarsChecked = Array(5).fill(false);
+    newRatingStarsChecked[index] = checked;
     this.setState({
-      ratingStarsChecked: newRatingStarsCheked,
+      ratingStarsChecked: newRatingStarsChecked,
     });
   }
 
   render() {
 
     const id = this.props.match.params.id;
-    const ratingStarsChecked = this.state.ratingStarsChecked;
+    const {ratingStarsChecked} = this.state;
     const currentFilm = this.props.films.find((film) => film.id === id);
     const {title, previewImage} = currentFilm;
 
@@ -86,7 +85,7 @@ class AddReviewScreen extends React.PureComponent {
         </div>
 
         <div className="add-review">
-          <form action="#" className="add-review__form">
+          <form action="#" className="add-review__form" onSubmit={this._handleSubmit}>
             <div className="rating">
               <div className="rating__stars">
                 {ratingStarsChecked.map((starCheck, index) => (
@@ -94,14 +93,14 @@ class AddReviewScreen extends React.PureComponent {
                     key={generateId()}
                     index={index}
                     starCheck={starCheck}
-                    onStarClick={(checked) => this.handleStarClick(checked, index)} />
+                    onStarClick={(checked) => this._handleStarClick(checked, index)} />
                 ))}
               </div>
             </div>
 
             <div className="add-review__text">
               <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"
-                onChange={this.handleTextChange} />
+                onChange={this._handleTextChange} />
               <div className="add-review__submit">
                 <button className="add-review__btn" type="submit">Post</button>
               </div>
