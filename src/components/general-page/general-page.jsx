@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import FilmList from "../film-list/film-list";
+import {filmType} from '../../types/film';
+
 
 const GeneralPage = ({films, onFilmCardClick}) => {
 
@@ -151,22 +153,7 @@ const GeneralPage = ({films, onFilmCardClick}) => {
 };
 
 GeneralPage.propTypes = {
-  films: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    previewImage: PropTypes.string.isRequired,
-    previewVideo: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    description: PropTypes.array.isRequired,
-    rating: PropTypes.string.isRequired,
-    ratingText: PropTypes.string.isRequired,
-    votes: PropTypes.number.isRequired,
-    director: PropTypes.string.isRequired,
-    actors: PropTypes.array.isRequired,
-    runtime: PropTypes.number.isRequired,
-    myList: PropTypes.bool.isRequired,
-  })).isRequired,
+  films: PropTypes.arrayOf(filmType).isRequired,
   onFilmCardClick: PropTypes.func.isRequired,
 };
 
