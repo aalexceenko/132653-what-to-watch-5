@@ -1,8 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
-import {generateId} from '../../utils.js';
-import RatingStars from '../rating-stars/rating-stars';
 import {filmType} from '../../types/film';
 
 
@@ -11,12 +9,13 @@ class AddReviewScreen extends React.PureComponent {
     super(props);
 
     this.state = {
-      ratingStarsChecked: [false, false, false, false, false],
+      ratingStarsChecked: 3,
       textReview: ``,
     };
 
     this._handleSubmit = this._handleSubmit.bind(this);
     this._handleTextChange = this._handleTextChange.bind(this);
+    this._handleStarClick = this._handleStarClick.bind(this);
   }
 
   _handleSubmit(evt) {
@@ -29,18 +28,16 @@ class AddReviewScreen extends React.PureComponent {
     });
   }
 
-  _handleStarClick(checked, index) {
-    const newRatingStarsChecked = Array(5).fill(false);
-    newRatingStarsChecked[index] = checked;
+  _handleStarClick(evt) {
     this.setState({
-      ratingStarsChecked: newRatingStarsChecked,
+      ratingStarsChecked: evt.target.value,
     });
   }
 
   render() {
 
     const id = this.props.match.params.id;
-    const {ratingStarsChecked} = this.state;
+    const {textReview} = this.state;
     const currentFilm = this.props.films.find((film) => film.id === id);
     const {title, previewImage} = currentFilm;
 
@@ -89,18 +86,25 @@ class AddReviewScreen extends React.PureComponent {
           <form action="#" className="add-review__form" onSubmit={this._handleSubmit}>
             <div className="rating">
               <div className="rating__stars">
-                {ratingStarsChecked.map((starCheck, index) => (
-                  <RatingStars
-                    key={generateId()}
-                    index={index}
-                    starCheck={starCheck}
-                    onStarClick={(checked) => this._handleStarClick(checked, index)} />
-                ))}
+                <input className="rating__input" id="star-1" type="radio" name="rating" value="1" onChange={this._handleStarClick}/>
+                <label className="rating__label" htmlFor="star-1">Rating 1</label>
+
+                <input className="rating__input" id="star-2" type="radio" name="rating" value="2" onChange={this._handleStarClick} />
+                <label className="rating__label" htmlFor="star-2">Rating 2</label>
+
+                <input className="rating__input" id="star-3" type="radio" name="rating" value="3" defaultChecked onChange={this._handleStarClick}/>
+                <label className="rating__label" htmlFor="star-3">Rating 3</label>
+
+                <input className="rating__input" id="star-4" type="radio" name="rating" value="4" onChange={this._handleStarClick}/>
+                <label className="rating__label" htmlFor="star-4">Rating 4</label>
+
+                <input className="rating__input" id="star-5" type="radio" name="rating" value="5" onChange={this._handleStarClick}/>
+                <label className="rating__label" htmlFor="star-5">Rating 5</label>
               </div>
             </div>
 
             <div className="add-review__text">
-              <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"
+              <textarea className="add-review__textarea" value={textReview} name="review-text" id="review-text" placeholder="Review text"
                 onChange={this._handleTextChange} />
               <div className="add-review__submit">
                 <button className="add-review__btn" type="submit">Post</button>

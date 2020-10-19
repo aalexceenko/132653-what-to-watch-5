@@ -10,21 +10,27 @@ import PlayerScreen from "../player-screen/player-screen";
 import {filmType} from '../../types/film';
 
 
+const AppRoute = {
+  DEFAULT: `/`,
+  LOGIN: `/login`,
+  MY_LIST: `/mylist`,
+};
+
 const App = ({films}) => {
 
   return (
 
     <BrowserRouter>
       <Switch>
-        <Route exact path="/"
+        <Route exact path={AppRoute.DEFAULT}
           render={({history}) => (
             <GeneralPage films={films} onFilmCardClick={(id) => history.push(`/films/${id}`)}/>
           )}
         />
-        <Route exact path="/login">
+        <Route exact path={AppRoute.LOGIN}>
           <LoginScreen />
         </Route>
-        <Route exact path="/mylist">
+        <Route exact path={AppRoute.MY_LIST}>
           <MyListScreen />
         </Route>
         <Route exact path="/films/:id"
