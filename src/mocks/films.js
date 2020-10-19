@@ -37,7 +37,7 @@ const GENRES = [
   `Thriller`,
 ];
 
-const POSTER = [
+const POSTERS = [
   `img/aviator.jpg`,
   `img/bohemian-rhapsody.jpg`,
   `img/dardjeeling-limited.jpg`,
@@ -96,7 +96,7 @@ const generateFilm = () => ({
   id: generateId(),
   title: getRandomArrayItem(TITLES),
   genre: getRandomArrayItem(GENRES),
-  previewImage: getRandomArrayItem(POSTER),
+  previewImage: getRandomArrayItem(POSTERS),
   previewVideo: PREVIEW_VIDEO,
   year: getRandomInteger(ReleaseYear.MIN, ReleaseYear.MAX),
   description: getRandomArrayItems(DESCRIPTION_STRINGS),
