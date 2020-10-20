@@ -7,31 +7,42 @@ import FilmScreen from "../film-screen/film-screen";
 import LoginScreen from "../login-screen/login-screen";
 import MyListScreen from "../my-list-screen/my-list-screen";
 import PlayerScreen from "../player-screen/player-screen";
+import {filmType} from '../../types/film';
 
 
-const App = ({title, genre, releaseDate}) => {
+const AppRoute = {
+  DEFAULT: `/`,
+  LOGIN: `/login`,
+  MY_LIST: `/mylist`,
+};
+
+const App = ({films}) => {
 
   return (
-  // <GeneralPage title={title} genre={genre} releaseDate={releaseDate} />
-
 
     <BrowserRouter>
       <Switch>
-        <Route exact path="/">
-          <GeneralPage title={title} genre={genre} releaseDate={releaseDate} />
-        </Route>
-        <Route exact path="/login">
+        <Route exact path={AppRoute.DEFAULT}
+          render={({history}) => (
+            <GeneralPage films={films} onFilmCardClick={(id) => history.push(`/films/${id}`)}/>
+          )}
+        />
+        <Route exact path={AppRoute.LOGIN}>
           <LoginScreen />
         </Route>
-        <Route exact path="/mylist">
+        <Route exact path={AppRoute.MY_LIST}>
           <MyListScreen />
         </Route>
-        <Route exact path="/films/:id">
-          <FilmScreen />
-        </Route>
-        <Route exact path="/films/:id/review">
-          <AddReviewScreen />
-        </Route>
+        <Route exact path="/films/:id"
+          render={({history, match}) => (
+            <FilmScreen films={films} match={match} onFilmCardClick={(id) => history.push(`/films/${id}`)}/>
+          )}
+        />
+        <Route exact path="/films/:id/review"
+          render={({match}) => (
+            <AddReviewScreen films={films} match={match}/>
+          )}
+        />
         <Route exact path="/player/:id">
           <PlayerScreen />
         </Route>
@@ -41,9 +52,7 @@ const App = ({title, genre, releaseDate}) => {
 };
 
 App.propTypes = {
-  title: PropTypes.string.isRequired,
-  genre: PropTypes.string.isRequired,
-  releaseDate: PropTypes.number.isRequired,
+  films: PropTypes.arrayOf(filmType).isRequired,
 };
 
 export default App;
