@@ -14,6 +14,7 @@ const VideoPlayer = ({previewVideo, preview, title, isVideo, playVideo}) => {
           src={previewVideo}
           poster={preview}
           ref={playVideo}
+          muted
         >
         </video>
         :
