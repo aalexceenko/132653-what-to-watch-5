@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {Link} from 'react-router-dom';
 import {filmType} from '../../types/film';
+import Tabs from '../tabs/tabs';
 
 
 const FilmScreen = ({films, match}) => {
@@ -9,7 +10,7 @@ const FilmScreen = ({films, match}) => {
   const id = match.params.id;
   const currentFilm = films.find((film) => film.id === id);
 
-  const {title, genre, year, previewImage, description, rating, ratingText, director, votes, actors} = currentFilm;
+  const {title, genre, year, previewImage} = currentFilm;
 
   return (
     <React.Fragment>
@@ -71,35 +72,9 @@ const FilmScreen = ({films, match}) => {
             </div>
 
             <div className="movie-card__desc">
-              <nav className="movie-nav movie-card__nav">
-                <ul className="movie-nav__list">
-                  <li className="movie-nav__item movie-nav__item--active">
-                    <a href="#" className="movie-nav__link">Overview</a>
-                  </li>
-                  <li className="movie-nav__item">
-                    <a href="#" className="movie-nav__link">Details</a>
-                  </li>
-                  <li className="movie-nav__item">
-                    <a href="#" className="movie-nav__link">Reviews</a>
-                  </li>
-                </ul>
-              </nav>
 
-              <div className="movie-rating">
-                <div className="movie-rating__score">{rating} </div>
-                <p className="movie-rating__meta">
-                  <span className="movie-rating__level">{ratingText} </span>
-                  <span className="movie-rating__count">{votes} ratings</span>
-                </p>
-              </div>
+              <Tabs film={currentFilm} />
 
-              <div className="movie-card__text">
-                <p>{description.join(` `)}</p>
-
-                <p className="movie-card__director"><strong>Director: {director} </strong></p>
-
-                <p className="movie-card__starring"><strong>Starring: {actors.join(`, `)} </strong></p>
-              </div>
             </div>
           </div>
         </div>
