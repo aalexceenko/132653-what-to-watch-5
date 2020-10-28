@@ -1,3 +1,11 @@
+import moment from 'moment';
+
+export const getDuration = (minutes) => {
+  const duration = moment.duration(minutes, `minutes`);
+  const format = minutes > 60 ? `H[h] mm[m]` : `mm[m]`;
+  return moment.utc(duration.as(`milliseconds`)).format(format).toString();
+};
+
 export const generateId = () => `_` + Math.random().toString(36).substr(2, 9);
 
 export const getRandomInteger = (a = 0, b = 1) => {

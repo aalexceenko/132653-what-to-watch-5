@@ -4,6 +4,8 @@ import {filmType} from '../../types/film';
 
 import {TabsType} from '../../const';
 import TabFilmOverview from '../tab-film-overview/tab-film-overview';
+import TabFilmDetails from '../tab-film-details/tab-film-details';
+
 
 // import PropTypes from 'prop-types';
 
@@ -24,14 +26,14 @@ class Tabs extends React.PureComponent {
           activeTab: TabsType[tabName],
         }
     );
-    console.log(this.setState.activeTab);
   }
 
   _renderContentForTab() {
 
     const {film} = this.props;
-    const {description, rating, ratingText, director, votes, actors} = film;
+    const {description, rating, ratingText, director, votes, actors, year, runtime, genre} = film;
 
+    console.log(this.state.activeTab);
 
     switch (this.state.activeTab) {
       case TabsType.OVERVIEW:
@@ -49,7 +51,14 @@ class Tabs extends React.PureComponent {
 
       case TabsType.DETAILS:
         return (
-          console.log(`DETAILS`)
+          // console.log(`DETAILS`)
+          <TabFilmDetails
+            runtime={runtime}
+            year={year}
+            genre={genre}
+            director={director}
+            actors={actors}
+          />
         );
 
       case TabsType.REVIEWS:
