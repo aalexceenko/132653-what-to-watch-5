@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from "prop-types";
 import {filmType} from '../../types/film';
 import {reviewType} from '../../types/review';
-
 import {TabsType} from '../../const';
 import TabFilmOverview from '../tab-film-overview/tab-film-overview';
 import TabFilmDetails from '../tab-film-details/tab-film-details';
@@ -33,14 +32,10 @@ class Tabs extends React.PureComponent {
     const {film, reviews} = this.props;
     const {description, rating, ratingText, director, votes, actors, year, runtime, genre} = film;
 
-    console.log(reviews);
-
-    console.log(this.state.activeTab);
 
     switch (this.state.activeTab) {
       case TabsType.OVERVIEW:
         return (
-          // console.log(`OVERVIEW`);
           <TabFilmOverview
             description={description}
             rating={rating}
@@ -53,7 +48,6 @@ class Tabs extends React.PureComponent {
 
       case TabsType.DETAILS:
         return (
-          // console.log(`DETAILS`)
           <TabFilmDetails
             runtime={runtime}
             year={year}
@@ -65,7 +59,6 @@ class Tabs extends React.PureComponent {
 
       case TabsType.REVIEWS:
         return (
-          // console.log(`REVIEWS`)
           <TabFilmReview
             reviews={reviews}
           />
@@ -99,9 +92,7 @@ class Tabs extends React.PureComponent {
 
 Tabs.propTypes = {
   film: filmType.isRequired,
-  // review: reviewType.isRequired,
   reviews: PropTypes.arrayOf(reviewType).isRequired,
-
 };
 
 export default Tabs;
