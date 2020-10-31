@@ -3,7 +3,7 @@ const {shape} = PropTypes;
 
 export const reviewType = shape({
   author: PropTypes.string.isRequired,
-  rating: PropTypes.number.isRequired,
+  rating: PropTypes.string.isRequired,
   message: PropTypes.string.isRequired,
   date: PropTypes.instanceOf(Date).isRequired,
 });

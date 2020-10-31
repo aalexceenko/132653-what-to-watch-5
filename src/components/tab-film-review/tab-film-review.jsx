@@ -1,10 +1,10 @@
 import React from "react";
-import PropTypes, { object } from "prop-types";
+import PropTypes from "prop-types";
 // import {review} from "../../mocks/films";
 // import {getDuration} from "../../utils";
 
 import {reviewType} from '../../types/review';
-import {getDateRevieFormat} from "../../utils";
+import {getDateRevieFormat, sortReviewRating} from "../../utils";
 
 const createReviewTemplate = (reviews) => {
   return (
@@ -30,9 +30,13 @@ const createReviewTemplate = (reviews) => {
 
 const TabFilmReview = ({reviews}) => {
   console.log(reviews);
+  let sortReviews = reviews.sort(sortReviewRating);
+  console.log(sortReviews);
+
   console.log(Object.keys(reviews).length);
 
-  let rightColumn, leftColumn;
+  let rightColumn;
+  let leftColumn;
 
   let lengthReviews = Object.keys(reviews).length;
   let midleCount = Math.round(lengthReviews / 2);

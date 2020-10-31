@@ -111,7 +111,7 @@ const generateFilm = () => ({
 
 const generateReview = () => ({
   author: getRandomArrayItem(NAMES),
-  rating: getRandomInteger(0, RATING_REVIEW_MAX),
+  rating: getRandomFloat(0, RATING_REVIEW_MAX),
   message: getRandomArrayItem(DESCRIPTION_STRINGS),
   date: generateDate(new Date(2000, 0, 1), new Date()),
 });
