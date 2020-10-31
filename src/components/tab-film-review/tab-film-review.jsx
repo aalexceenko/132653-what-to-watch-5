@@ -1,9 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-// import {review} from "../../mocks/films";
-// import {getDuration} from "../../utils";
-
-import {reviewType} from '../../types/review';
+import {reviewType} from "../../types/review";
 import {getDateRevieFormat, sortReviewRating} from "../../utils";
 
 const createReviewTemplate = (reviews) => {
@@ -29,11 +26,8 @@ const createReviewTemplate = (reviews) => {
 };
 
 const TabFilmReview = ({reviews}) => {
-  console.log(reviews);
-  let sortReviews = reviews.sort(sortReviewRating);
-  console.log(sortReviews);
 
-  console.log(Object.keys(reviews).length);
+  let sortReviews = reviews.slice().sort(sortReviewRating);
 
   let rightColumn;
   let leftColumn;
@@ -41,8 +35,8 @@ const TabFilmReview = ({reviews}) => {
   let lengthReviews = Object.keys(reviews).length;
   let midleCount = Math.round(lengthReviews / 2);
 
-  leftColumn = reviews.slice(0, midleCount);
-  rightColumn = reviews.slice(midleCount);
+  leftColumn = sortReviews.slice(0, midleCount);
+  rightColumn = sortReviews.slice(midleCount);
 
   return (
     <div className="movie-card__reviews movie-card__row">
@@ -61,14 +55,7 @@ const TabFilmReview = ({reviews}) => {
 };
 
 TabFilmReview.propTypes = {
-  // runtime: PropTypes.number.isRequired,
-  // year: PropTypes.number.isRequired,
-  // genre: PropTypes.string.isRequired,
-  // director: PropTypes.string.isRequired,
-  // actors: PropTypes.array.isRequired,
-  // review: reviewType.isRequired,
   reviews: PropTypes.arrayOf(reviewType).isRequired,
-
 };
 
 export default TabFilmReview;

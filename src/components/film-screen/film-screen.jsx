@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {Link} from 'react-router-dom';
-import {filmType} from '../../types/film';
-import Tabs from '../tabs/tabs';
+import {Link} from "react-router-dom";
+import {filmType} from "../../types/film";
+import Tabs from "../tabs/tabs";
 import {reviewType} from "../../types/review";
 
 const LIKE_FILMS_MAX = 4;
