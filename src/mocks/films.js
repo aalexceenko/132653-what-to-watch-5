@@ -2,7 +2,7 @@ import {generateId, getRandomFloat, getRandomArrayItem, getRandomInteger, getRan
 
 const PREVIEW_VIDEO = `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`;
 const FILM_COUNT = 8;
-const REVIEW_COUNT = 5;
+const REVIEW_COUNT = 9;
 const VOTES_MAX = 500;
 const RATING_FILM_MAX = 10;
 const RATING_REVIEW_MAX = 5;

@@ -3,9 +3,10 @@ import PropTypes from "prop-types";
 import {Link} from 'react-router-dom';
 import {filmType} from '../../types/film';
 import Tabs from '../tabs/tabs';
+import {reviewType} from "../../types/review";
 
 
-const FilmScreen = ({films, match}) => {
+const FilmScreen = ({films, match, reviews}) => {
 
   const id = match.params.id;
   const currentFilm = films.find((film) => film.id === id);
@@ -73,7 +74,7 @@ const FilmScreen = ({films, match}) => {
 
             <div className="movie-card__desc">
 
-              <Tabs film={currentFilm} />
+              <Tabs film={currentFilm} reviews={reviews} />
 
             </div>
           </div>
@@ -146,6 +147,7 @@ const FilmScreen = ({films, match}) => {
 
 FilmScreen.propTypes = {
   films: PropTypes.arrayOf(filmType).isRequired,
+  reviews: PropTypes.arrayOf(reviewType).isRequired,
   onFilmCardClick: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired,
 };

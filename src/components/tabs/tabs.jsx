@@ -1,13 +1,13 @@
 import React from 'react';
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import {filmType} from '../../types/film';
+import {reviewType} from '../../types/review';
 
 import {TabsType} from '../../const';
 import TabFilmOverview from '../tab-film-overview/tab-film-overview';
 import TabFilmDetails from '../tab-film-details/tab-film-details';
+import TabFilmReview from '../tab-film-review/tab-film-review';
 
-
-// import PropTypes from 'prop-types';
 
 class Tabs extends React.PureComponent {
   constructor(props) {
@@ -30,8 +30,10 @@ class Tabs extends React.PureComponent {
 
   _renderContentForTab() {
 
-    const {film} = this.props;
+    const {film, reviews} = this.props;
     const {description, rating, ratingText, director, votes, actors, year, runtime, genre} = film;
+
+    console.log(reviews);
 
     console.log(this.state.activeTab);
 
@@ -63,7 +65,10 @@ class Tabs extends React.PureComponent {
 
       case TabsType.REVIEWS:
         return (
-          console.log(`REVIEWS`)
+          // console.log(`REVIEWS`)
+          <TabFilmReview
+            reviews={reviews}
+          />
         );
       default:
         throw new Error(`Something went wrong. No matching tab!`);
@@ -94,6 +99,9 @@ class Tabs extends React.PureComponent {
 
 Tabs.propTypes = {
   film: filmType.isRequired,
+  // review: reviewType.isRequired,
+  reviews: PropTypes.arrayOf(reviewType).isRequired,
+
 };
 
 export default Tabs;

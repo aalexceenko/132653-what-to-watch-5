@@ -5,6 +5,7 @@ export const getDuration = (minutes) => {
   const format = minutes > 60 ? `H[h] mm[m]` : `mm[m]`;
   return moment.utc(duration.as(`milliseconds`)).format(format).toString();
 };
+export const getDateRevieFormat = (date) => moment(date).format(`LL`);
 
 export const generateId = () => `_` + Math.random().toString(36).substr(2, 9);
 
