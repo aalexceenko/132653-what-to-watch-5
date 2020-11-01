@@ -1,15 +1,43 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {Link} from 'react-router-dom';
-import {filmType} from '../../types/film';
+import {Link} from "react-router-dom";
+import {filmType} from "../../types/film";
+import Tabs from "../tabs/tabs";
+import {reviewType} from "../../types/review";
+
+const LIKE_FILMS_MAX = 4;
 
 
-const FilmScreen = ({films, match}) => {
+const createMoreLikeTemplate = (likeFilms) => {
+  return (
+    <React.Fragment>
+      {Object.values(likeFilms.map((film, i) => {
+        const {id, previewImage, title} = film;
+        return (
+          <article className="small-movie-card catalog__movies-card" key={i}>
+            <div className="small-movie-card__image">
+              <img src={previewImage} alt={title} />
+            </div>
+            <h3 className="small-movie-card__title">
+              <Link className="small-movie-card__link" to={`/films/${id}`}>{title}</Link>
+            </h3>
+          </article>
+        );
+      }))}
+
+    </React.Fragment>
+  );
+};
+
+const FilmScreen = ({films, match, reviews}) => {
 
   const id = match.params.id;
   const currentFilm = films.find((film) => film.id === id);
 
-  const {title, genre, year, previewImage, description, rating, ratingText, director, votes, actors} = currentFilm;
+  const {title, genre, year, previewImage} = currentFilm;
+
+  let likeFilms = films.filter((film) => (film.genre === genre && film.id !== id)).slice(0, LIKE_FILMS_MAX);
+
 
   return (
     <React.Fragment>
@@ -71,35 +99,9 @@ const FilmScreen = ({films, match}) => {
             </div>
 
             <div className="movie-card__desc">
-              <nav className="movie-nav movie-card__nav">
-                <ul className="movie-nav__list">
-                  <li className="movie-nav__item movie-nav__item--active">
-                    <a href="#" className="movie-nav__link">Overview</a>
-                  </li>
-                  <li className="movie-nav__item">
-                    <a href="#" className="movie-nav__link">Details</a>
-                  </li>
-                  <li className="movie-nav__item">
-                    <a href="#" className="movie-nav__link">Reviews</a>
-                  </li>
-                </ul>
-              </nav>
 
-              <div className="movie-rating">
-                <div className="movie-rating__score">{rating} </div>
-                <p className="movie-rating__meta">
-                  <span className="movie-rating__level">{ratingText} </span>
-                  <span className="movie-rating__count">{votes} ratings</span>
-                </p>
-              </div>
+              <Tabs film={currentFilm} reviews={reviews} />
 
-              <div className="movie-card__text">
-                <p>{description.join(` `)}</p>
-
-                <p className="movie-card__director"><strong>Director: {director} </strong></p>
-
-                <p className="movie-card__starring"><strong>Starring: {actors.join(`, `)} </strong></p>
-              </div>
             </div>
           </div>
         </div>
@@ -111,41 +113,9 @@ const FilmScreen = ({films, match}) => {
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__movies-list">
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175" />
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Fantastic Beasts: The Crimes of Grindelwald</a>
-              </h3>
-            </article>
 
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/bohemian-rhapsody.jpg" alt="Bohemian Rhapsody" width="280" height="175" />
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Bohemian Rhapsody</a>
-              </h3>
-            </article>
+            {createMoreLikeTemplate(likeFilms)}
 
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/macbeth.jpg" alt="Macbeth" width="280" height="175" />
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Macbeth</a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/aviator.jpg" alt="Aviator" width="280" height="175" />
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Aviator</a>
-              </h3>
-            </article>
           </div>
         </section>
 
@@ -171,6 +141,7 @@ const FilmScreen = ({films, match}) => {
 
 FilmScreen.propTypes = {
   films: PropTypes.arrayOf(filmType).isRequired,
+  reviews: PropTypes.arrayOf(reviewType).isRequired,
   onFilmCardClick: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired,
 };

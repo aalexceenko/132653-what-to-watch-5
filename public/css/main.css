@@ -811,7 +811,8 @@ main {
   font-weight: bold; }
 
 .movie-card__details-value {
-  color: #131313; }
+  color: #131313;
+  white-space: pre-line; }
 
 .movie-card__reviews {
   padding-top: 20px; }

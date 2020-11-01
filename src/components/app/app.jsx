@@ -8,6 +8,7 @@ import LoginScreen from "../login-screen/login-screen";
 import MyListScreen from "../my-list-screen/my-list-screen";
 import PlayerScreen from "../player-screen/player-screen";
 import {filmType} from '../../types/film';
+import {reviewType} from '../../types/review';
 
 
 const AppRoute = {
@@ -16,7 +17,7 @@ const AppRoute = {
   MY_LIST: `/mylist`,
 };
 
-const App = ({films}) => {
+const App = ({films, reviews}) => {
 
   return (
 
@@ -24,7 +25,7 @@ const App = ({films}) => {
       <Switch>
         <Route exact path={AppRoute.DEFAULT}
           render={({history}) => (
-            <GeneralPage films={films} onFilmCardClick={(id) => history.push(`/films/${id}`)}/>
+            <GeneralPage films={films} reviews={reviews} onFilmCardClick={(id) => history.push(`/films/${id}`)}/>
           )}
         />
         <Route exact path={AppRoute.LOGIN}>
@@ -35,12 +36,12 @@ const App = ({films}) => {
         </Route>
         <Route exact path="/films/:id"
           render={({history, match}) => (
-            <FilmScreen films={films} match={match} onFilmCardClick={(id) => history.push(`/films/${id}`)}/>
+            <FilmScreen films={films} reviews={reviews} match={match} onFilmCardClick={(id) => history.push(`/films/${id}`)}/>
           )}
         />
         <Route exact path="/films/:id/review"
           render={({match}) => (
-            <AddReviewScreen films={films} match={match}/>
+            <AddReviewScreen films={films} reviews={reviews} match={match}/>
           )}
         />
         <Route exact path="/player/:id">
@@ -53,6 +54,7 @@ const App = ({films}) => {
 
 App.propTypes = {
   films: PropTypes.arrayOf(filmType).isRequired,
+  reviews: PropTypes.arrayOf(reviewType).isRequired,
 };
 
 export default App;

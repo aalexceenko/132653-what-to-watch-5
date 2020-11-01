@@ -1,8 +1,8 @@
 import {generateId, getRandomFloat, getRandomArrayItem, getRandomInteger, getRandomArrayItems, generateDate} from "../utils";
 
 const PREVIEW_VIDEO = `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`;
-const FILM_COUNT = 8;
-const REVIEW_COUNT = 5;
+const FILM_COUNT = 28;
+const REVIEW_COUNT = 9;
 const VOTES_MAX = 500;
 const RATING_FILM_MAX = 10;
 const RATING_REVIEW_MAX = 5;
@@ -111,7 +111,7 @@ const generateFilm = () => ({
 
 const generateReview = () => ({
   author: getRandomArrayItem(NAMES),
-  rating: getRandomInteger(0, RATING_REVIEW_MAX),
+  rating: getRandomFloat(0, RATING_REVIEW_MAX),
   message: getRandomArrayItem(DESCRIPTION_STRINGS),
   date: generateDate(new Date(2000, 0, 1), new Date()),
 });

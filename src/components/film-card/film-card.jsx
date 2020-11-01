@@ -10,7 +10,6 @@ class FilmCard extends React.PureComponent {
     super(props);
 
     this.state = {
-      videoElement: null,
       isVideo: false,
     };
 
@@ -36,6 +35,7 @@ class FilmCard extends React.PureComponent {
 
   _stopVideo() {
     clearTimeout(this.timeoutID);
+    this.timeoutID = null;
   }
 
   render() {

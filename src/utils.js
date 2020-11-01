@@ -1,3 +1,12 @@
+import moment from 'moment';
+
+export const getDuration = (minutes) => {
+  const duration = moment.duration(minutes, `minutes`);
+  const format = minutes > 60 ? `H[h] mm[m]` : `mm[m]`;
+  return moment.utc(duration.as(`milliseconds`)).format(format).toString();
+};
+export const getDateRevieFormat = (date) => moment(date).format(`LL`);
+
 export const generateId = () => `_` + Math.random().toString(36).substr(2, 9);
 
 export const getRandomInteger = (a = 0, b = 1) => {
@@ -41,5 +50,17 @@ export const getRandomFloat = (a = 1, b = 0) => {
   const lower = Math.min(a, b);
   const upper = Math.max(a, b);
 
-  return (lower + Math.random() * (upper - lower)).toFixed(1);
+  return (lower + Math.random() * (upper - lower)).toFixed(1).replace(`.`, `,`);
+};
+
+export const sortReviewRating = (reviewA, reviewB) => {
+  if (reviewA.rating > reviewB.rating) {
+    return -1;
+  }
+
+  if (reviewA.rating < reviewB.rating) {
+    return 1;
+  }
+
+  return 0;
 };
