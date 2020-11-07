@@ -10,7 +10,7 @@ const GenresList = ({activeGenre, genres, changeActiveGenre}) => {
     <ul className="catalog__genres-list">
       {genres.map((genre, i) => (
         <li className={`catalog__genres-item ${activeGenre === genre ? `catalog__genres-item--active` : ``}`} key={i}>
-          <a href="#" className="catalog__genres-link"
+          <a className="catalog__genres-link"
             onClick={() => {
               changeActiveGenre(genre);
             }}>{genre}</a>
