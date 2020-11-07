@@ -1,4 +1,6 @@
 import moment from 'moment';
+import {ALL_GENRES} from "./const";
+
 
 export const getDuration = (minutes) => {
   const duration = moment.duration(minutes, `minutes`);
@@ -64,3 +66,22 @@ export const sortReviewRating = (reviewA, reviewB) => {
 
   return 0;
 };
+
+export const extend = (a, b) => {
+  return Object.assign({}, a, b);
+};
+
+export const getFilmsByGenre = (films, genre) => {
+  if (genre === ALL_GENRES) {
+    return films;
+  }
+
+  return films.filter((film) => genre === film.genre);
+};
+
+export const getGenres = (films) => {
+  const genres = films.map((film) => film.genre);
+
+  return [ALL_GENRES, ...new Set(genres)];
+};
+
