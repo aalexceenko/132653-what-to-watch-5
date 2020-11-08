@@ -2,6 +2,8 @@ import React from 'react';
 import FilmCard from '../film-card/film-card';
 import PropTypes from 'prop-types';
 import {filmType} from '../../types/film';
+import {connect} from 'react-redux';
+import {getFilmsByGenre} from "../../utils";
 
 
 const FilmList = ({films, onFilmCardClick}) => {
@@ -21,4 +23,14 @@ FilmList.propTypes = {
   onFilmCardClick: PropTypes.func.isRequired,
 };
 
-export default FilmList;
+const mapStateToProps = (state) => {
+  return ({
+    films: getFilmsByGenre(state.films, state.activeGenre),
+  });
+};
+
+
+export {FilmList};
+export default connect(mapStateToProps)(FilmList);
+
+
