@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import FilmList from "../film-list/film-list";
 import GenresList from "../genres-list/genres-list";
+import ShowMoreButton from "../show-more-button/show-more-button";
 import {filmType} from '../../types/film';
 
 
@@ -99,9 +100,8 @@ const GeneralPage = ({films, onFilmCardClick}) => {
 
           <FilmList films={films} onFilmCardClick={onFilmCardClick} />
 
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          <ShowMoreButton />
+
         </section>
 
         <footer className="page-footer">
