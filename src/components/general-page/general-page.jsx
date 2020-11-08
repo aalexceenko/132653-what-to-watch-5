@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import FilmList from "../film-list/film-list";
 import GenresList from "../genres-list/genres-list";
-import ShowMoreButton from "../show-more-button/show-more-button";
+import FilmListContainer from "../film-list-container/film-list-container";
 import {filmType} from '../../types/film';
 
 
@@ -98,9 +97,7 @@ const GeneralPage = ({films, onFilmCardClick}) => {
 
           {<GenresList />}
 
-          <FilmList films={films} onFilmCardClick={onFilmCardClick} />
-
-          <ShowMoreButton />
+          <FilmListContainer onFilmCardClick={onFilmCardClick} />
 
         </section>
 
