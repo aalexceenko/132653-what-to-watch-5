@@ -67,16 +67,10 @@ export const sortReviewRating = (reviewA, reviewB) => {
   return 0;
 };
 
-export const extend = (a, b) => {
-  return Object.assign({}, a, b);
-};
+export const extend = (a, b) => Object.assign({}, a, b);
 
 export const getFilmsByGenre = (films, genre) => {
-  if (genre === ALL_GENRES) {
-    return films;
-  }
-
-  return films.filter((film) => genre === film.genre);
+  return (genre === ALL_GENRES) ? films : (films.filter((film) => genre === film.genre));
 };
 
 export const getGenres = (films) => {
@@ -85,9 +79,7 @@ export const getGenres = (films) => {
   return [ALL_GENRES, ...new Set(genres)];
 };
 
-export const isShowMoreButton = (films, visibleFilmsCount) => {
-  return films.length > visibleFilmsCount;
-};
+export const isShowMoreButton = (films, visibleFilmsCount) => films.length > visibleFilmsCount;
 
 export const getVisibleFilms = (films, visibleFilmsCount) => {
   const visibleFilms = films.slice(0, visibleFilmsCount);
