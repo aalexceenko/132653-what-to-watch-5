@@ -28,10 +28,10 @@ GenresList.propTypes = {
   genres: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({activeGenre, films}) => {
   return ({
-    activeGenre: state.activeGenre,
-    genres: getGenres(state.films),
+    activeGenre,
+    genres: getGenres(films),
   });
 };
 
