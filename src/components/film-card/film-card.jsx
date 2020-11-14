@@ -3,72 +3,43 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {filmType} from '../../types/film';
 import VideoPlayer from '../video-player/video-player';
+import withFilmCard from "../../hocs/with-film-card/with-film-card";
 
 
-class FilmCard extends React.PureComponent {
-  constructor(props) {
-    super(props);
+const FilmCard = ({film, onFilmCardClick, isVideo, handleMouseEnter, handleMouseLeave, playVideo}) => {
+  const {title, previewImage, previewVideo, id} = film;
 
-    this.state = {
-      isVideo: false,
-    };
 
-    this._handleMouseEnter = this._handleMouseEnter.bind(this);
-    this._handleMouseLeave = this._handleMouseLeave.bind(this);
-    this._playVideo = this._playVideo.bind(this);
-  }
+  return (
+    <article className="small-movie-card catalog__movies-card"
+      onClick={() => onFilmCardClick(id)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <div className="small-movie-card__image">
+        <VideoPlayer
+          previewVideo={previewVideo}
+          preview={previewImage}
+          title={title}
+          isVideo={isVideo}
+          playVideo={playVideo}
+        />
+      </div>
+      <h3 className="small-movie-card__title">
+        <Link className="small-movie-card__link" to={`/films/${id}`}>{title}</Link>
+      </h3>
+    </article>
+  );
+};
 
-  _handleMouseEnter() {
-    this.setState({isVideo: true});
-  }
-
-  _handleMouseLeave() {
-    this.setState({isVideo: false});
-    this._stopVideo();
-  }
-
-  _playVideo(element) {
-    if (element) {
-      this.timeoutID = setTimeout(() => element.play(), 1000);
-    }
-  }
-
-  _stopVideo() {
-    clearTimeout(this.timeoutID);
-    this.timeoutID = null;
-  }
-
-  render() {
-    const {film, onFilmCardClick} = this.props;
-    const {title, previewImage, previewVideo, id} = film;
-    const {isVideo} = this.state;
-
-    return (
-      <article className="small-movie-card catalog__movies-card"
-        onClick={() => onFilmCardClick(id)}
-        onMouseEnter={this._handleMouseEnter}
-        onMouseLeave={this._handleMouseLeave}
-      >
-        <div className="small-movie-card__image">
-          <VideoPlayer
-            previewVideo={previewVideo}
-            preview={previewImage}
-            title={title}
-            isVideo={isVideo}
-            playVideo={this._playVideo}
-          />
-        </div>
-        <h3 className="small-movie-card__title">
-          <Link className="small-movie-card__link" to={`/films/${id}`}>{title}</Link>
-        </h3>
-      </article>
-    );
-  }
-}
 
 FilmCard.propTypes = {
   film: filmType,
   onFilmCardClick: PropTypes.func.isRequired,
+  isVideo: PropTypes.bool.isRequired,
+  handleMouseEnter: PropTypes.func.isRequired,
+  handleMouseLeave: PropTypes.func.isRequired,
+  playVideo: PropTypes.func.isRequired,
 };
 
-export default FilmCard;
+export default withFilmCard(FilmCard);
