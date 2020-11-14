@@ -81,9 +81,6 @@ export const getGenres = (films) => {
 
 export const isShowMoreButton = (films, visibleFilmsCount) => films.length > visibleFilmsCount;
 
-export const getVisibleFilms = (films, visibleFilmsCount) => {
-  const visibleFilms = films.slice(0, visibleFilmsCount);
+export const getVisibleFilms = (films, visibleFilmsCount) => films.slice(0, visibleFilmsCount);
 
-  return visibleFilms;
-};
 
