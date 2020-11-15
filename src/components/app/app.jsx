@@ -25,7 +25,12 @@ const App = ({films, reviews}) => {
       <Switch>
         <Route exact path={AppRoute.DEFAULT}
           render={({history}) => (
-            <GeneralPage films={films} reviews={reviews} onFilmCardClick={(id) => history.push(`/films/${id}`)}/>
+            <GeneralPage
+              films={films}
+              reviews={reviews}
+              onFilmCardClick={(id) => history.push(`/films/${id}`)}
+              handleButtonPlayVideo={(id) => history.push(`/player/${id}`)}
+            />
           )}
         />
         <Route exact path={AppRoute.LOGIN}>
@@ -36,7 +41,13 @@ const App = ({films, reviews}) => {
         </Route>
         <Route exact path="/films/:id"
           render={({history, match}) => (
-            <FilmScreen films={films} reviews={reviews} match={match} onFilmCardClick={(id) => history.push(`/films/${id}`)}/>
+            <FilmScreen
+              films={films}
+              reviews={reviews}
+              match={match}
+              onFilmCardClick={(id) => history.push(`/films/${id}`)}
+              handleButtonPlayVideo={(id) => history.push(`/player/${id}`)}
+            />
           )}
         />
         <Route exact path="/films/:id/review"
@@ -44,9 +55,11 @@ const App = ({films, reviews}) => {
             <AddReviewScreen films={films} reviews={reviews} match={match}/>
           )}
         />
-        <Route exact path="/player/:id">
-          <PlayerScreen />
-        </Route>
+        <Route exact path="/player/:id"
+          render={({match, history}) => (
+            <PlayerScreen films={films} match={match} handlePlayerExitClick={() => history.goBack()} />
+          )}
+        />
       </Switch>
     </BrowserRouter>
   );
