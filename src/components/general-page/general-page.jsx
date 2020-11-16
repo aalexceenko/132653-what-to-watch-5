@@ -2,12 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import GenresList from "../genres-list/genres-list";
 import FilmListContainer from "../film-list-container/film-list-container";
+import ButtonPlayVideo from "../button-play-video/button-play-video";
 import {filmType} from '../../types/film';
 
 
-const GeneralPage = ({films, onFilmCardClick}) => {
+const GeneralPage = ({films, onFilmCardClick, handleButtonPlayVideo}) => {
 
-  const {title, year, genre, previewImage} = films[0];
+  const {title, year, genre, previewImage, id} = films[0];
 
   return (
     <React.Fragment>
@@ -73,12 +74,7 @@ const GeneralPage = ({films, onFilmCardClick}) => {
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
+                <ButtonPlayVideo id={id} handleButtonPlayVideo={handleButtonPlayVideo} />
                 <button className="btn btn--list movie-card__button" type="button">
                   <svg viewBox="0 0 19 20" width="19" height="20">
                     <use xlinkHref="#add"></use>
@@ -122,6 +118,7 @@ const GeneralPage = ({films, onFilmCardClick}) => {
 GeneralPage.propTypes = {
   films: PropTypes.arrayOf(filmType).isRequired,
   onFilmCardClick: PropTypes.func.isRequired,
+  handleButtonPlayVideo: PropTypes.func.isRequired,
 };
 
 export default GeneralPage;
