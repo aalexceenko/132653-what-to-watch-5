@@ -1,6 +1,7 @@
 import {generateId, getRandomFloat, getRandomArrayItem, getRandomInteger, getRandomArrayItems, generateDate} from "../utils";
 
 const PREVIEW_VIDEO = `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`;
+const TRAILER = `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`;
 const FILM_COUNT = 28;
 const REVIEW_COUNT = 9;
 const VOTES_MAX = 500;
@@ -98,6 +99,7 @@ const generateFilm = () => ({
   genre: getRandomArrayItem(GENRES),
   previewImage: getRandomArrayItem(POSTERS),
   previewVideo: PREVIEW_VIDEO,
+  trailer: TRAILER,
   year: getRandomInteger(ReleaseYear.MIN, ReleaseYear.MAX),
   description: getRandomArrayItems(DESCRIPTION_STRINGS),
   rating: getRandomFloat(0, RATING_FILM_MAX),

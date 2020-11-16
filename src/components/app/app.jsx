@@ -6,10 +6,12 @@ import AddReviewScreen from "../add-review-screen/add-review-screen";
 import FilmScreen from "../film-screen/film-screen";
 import LoginScreen from "../login-screen/login-screen";
 import MyListScreen from "../my-list-screen/my-list-screen";
-import PlayerScreen from "../player-screen/player-screen";
+import Player from "../player/player";
 import {filmType} from '../../types/film';
 import {reviewType} from '../../types/review';
+import withPlayer from "../../hocs/with-player/with-player";
 
+const PlayerWrapped = withPlayer(Player);
 
 const AppRoute = {
   DEFAULT: `/`,
@@ -57,7 +59,7 @@ const App = ({films, reviews}) => {
         />
         <Route exact path="/player/:id"
           render={({match, history}) => (
-            <PlayerScreen films={films} match={match} handlePlayerExitClick={() => history.goBack()} />
+            <PlayerWrapped films={films} match={match} handlePlayerExitClick={() => history.goBack()} />
           )}
         />
       </Switch>

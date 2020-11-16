@@ -83,4 +83,6 @@ export const isShowMoreButton = (films, visibleFilmsCount) => films.length > vis
 
 export const getVisibleFilms = (films, visibleFilmsCount) => films.slice(0, visibleFilmsCount);
 
+export const getVideoProgress = (video) => (Math.floor(video.currentTime) / (Math.floor(video.duration) / 100));
 
+export const getFormattedTime = (date) => moment(date).format(`HH:mm:ss`);
