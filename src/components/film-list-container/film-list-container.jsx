@@ -34,9 +34,9 @@ FilmListContainer.propTypes = {
   showMoreFilms: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({films, activeGenre, visibleFilmsCount}) => ({
-  films: getFilmsByGenre(films, activeGenre),
-  visibleFilmsCount,
+const mapStateToProps = ({APP_PROCESS}) => ({
+  films: getFilmsByGenre(APP_PROCESS.films, APP_PROCESS.activeGenre),
+  visibleFilmsCount: APP_PROCESS.visibleFilmsCount,
 });
 
 const mapDispatchToProps = (dispatch) => ({

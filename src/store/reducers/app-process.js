@@ -1,7 +1,7 @@
-import {films} from "../mocks/films";
-import {ALL_GENRES, FILM_COUNT_STEP} from "../const";
-import {getGenres, extend} from "../utils";
-import {ActionType} from "./action";
+import {films} from "../../mocks/films";
+import {ALL_GENRES, FILM_COUNT_STEP} from "../../const";
+import {getGenres, extend} from "../../utils";
+import {ActionType} from "../action";
 
 
 const initialState = {
@@ -12,7 +12,7 @@ const initialState = {
 };
 
 
-const reducer = (state = initialState, action) => {
+const appProcess = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.CHANGE_ACTIVE_GENRE:
       return extend(state, {
@@ -27,4 +27,4 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
-export {reducer};
+export {appProcess};

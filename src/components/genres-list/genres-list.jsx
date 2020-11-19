@@ -6,6 +6,9 @@ import {ActionCreator} from "../../store/action";
 
 const GenresList = ({activeGenre, genres, changeActiveGenre}) => {
 
+  console.log(activeGenre, genres, changeActiveGenre);
+  console.log(1);
+
   return (
     <ul className="catalog__genres-list">
       {genres.map((genre, i) => (
@@ -28,10 +31,13 @@ GenresList.propTypes = {
   genres: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = ({activeGenre, films}) => {
+const mapStateToProps = ({APP_PROCESS}) => {
+  console.log(APP_PROCESS);
+  console.log(1);
+
   return ({
-    activeGenre,
-    genres: getGenres(films),
+    activeGenre: APP_PROCESS.activeGenre,
+    genres: getGenres(APP_PROCESS.films),
   });
 };
 
