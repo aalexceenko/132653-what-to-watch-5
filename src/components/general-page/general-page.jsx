@@ -8,7 +8,7 @@ import {filmType} from '../../types/film';
 
 const GeneralPage = ({films, onFilmCardClick, handleButtonPlayVideo}) => {
 
-  const {title, year, genre, previewImage, id, backgroundImage, poster} = films[0];
+  const {title, year, genre, id, backgroundImage, poster} = films[0];
 
   return (
     <React.Fragment>
