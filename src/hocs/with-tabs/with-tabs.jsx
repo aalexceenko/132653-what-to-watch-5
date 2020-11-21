@@ -1,11 +1,9 @@
 import React from "react";
-import PropTypes from "prop-types";
 import TabFilmOverview from '../../components/tab-film-overview/tab-film-overview';
 import TabFilmDetails from '../../components/tab-film-details/tab-film-details';
 import TabFilmReview from "../../components/tab-film-review/tab-film-review";
 import {TabsType} from '../../const';
 import {filmType} from '../../types/film';
-import {reviewType} from '../../types/review';
 
 
 const withTabs = (Component) => {
@@ -31,8 +29,8 @@ const withTabs = (Component) => {
 
     _renderContentForTab() {
 
-      const {film, reviews} = this.props;
-      const {description, rating, ratingText, director, votes, actors, year, runtime, genre} = film;
+      const {film} = this.props;
+      const {description, id, rating, ratingText, director, votes, actors, year, runtime, genre} = film;
 
 
       switch (this.state.activeTab) {
@@ -62,7 +60,7 @@ const withTabs = (Component) => {
         case TabsType.REVIEWS:
           return (
             <TabFilmReview
-              reviews={reviews}
+              id={id}
             />
           );
         default:
@@ -86,7 +84,6 @@ const withTabs = (Component) => {
 
   WithTabs.propTypes = {
     film: filmType.isRequired,
-    reviews: PropTypes.arrayOf(reviewType).isRequired,
   };
 
   return WithTabs;

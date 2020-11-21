@@ -7,7 +7,6 @@ const HttpCode = {
   UNAUTHORIZED: 401
 };
 
-// Конфигурирует объект axios
 export const createAPI = (onUnauthorized) => {
   const api = axios.create({
     baseURL: BACKEND_URL,
@@ -23,15 +22,12 @@ export const createAPI = (onUnauthorized) => {
     if (response.status === HttpCode.UNAUTHORIZED) {
       onUnauthorized();
 
-      // Бросаем ошибку, потому что нам важно прервать цепочку промисов после запроса авторизации.
-      // Запрос авторизации — это особый случай и важно дать понять приложению, что запрос был неудачным.
       throw err;
     }
 
     throw err;
   };
 
-  // Перехватывает коллбэки и перенаправляет выполнение на onSuccess() или на onFail()
   api.interceptors.response.use(onSuccess, onFail);
 
   return api;

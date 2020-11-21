@@ -14,7 +14,7 @@ const ButtonPlayVideo = ({id, handleButtonPlayVideo}) => {
 };
 
 ButtonPlayVideo.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   handleButtonPlayVideo: PropTypes.func.isRequired,
 };
 

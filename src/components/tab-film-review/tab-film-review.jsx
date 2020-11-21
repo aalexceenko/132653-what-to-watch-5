@@ -2,18 +2,20 @@ import React from "react";
 import PropTypes from "prop-types";
 import {reviewType} from "../../types/review";
 import {getDateRevieFormat, sortReviewRating} from "../../utils";
+import {fetchReviews} from "../../store/api-action";
+import {connect} from "react-redux";
 
 const createReviewTemplate = (reviews) => {
   return (
     <React.Fragment>
       {Object.values(reviews.map((review, i) => {
-        const {message, author, date, rating} = review;
+        const {comment, user, date, rating} = review;
         return (
           <div className="review" key={i}>
             <blockquote className="review__quote">
-              <p className="review__text">{message}</p>
+              <p className="review__text">{comment}</p>
               <footer className="review__details">
-                <cite className="review__author">{author}</cite>
+                <cite className="review__author">{user.name}</cite>
                 <time className="review__date" dateTime="2016-12-24">{getDateRevieFormat(date)}</time>
               </footer>
             </blockquote>
@@ -25,37 +27,63 @@ const createReviewTemplate = (reviews) => {
   );
 };
 
-const TabFilmReview = ({reviews}) => {
+class TabFilmReview extends React.PureComponent {
 
-  let sortReviews = reviews.slice().sort(sortReviewRating);
+  componentDidMount() {
+    const {getReviews, id} = this.props;
+    getReviews(id);
+  }
 
-  let rightColumn;
-  let leftColumn;
+  render() {
 
-  let lengthReviews = Object.keys(reviews).length;
-  let midleCount = Math.round(lengthReviews / 2);
+    const {reviews} = this.props;
 
-  leftColumn = sortReviews.slice(0, midleCount);
-  rightColumn = sortReviews.slice(midleCount);
+    let sortReviews = reviews.slice().sort(sortReviewRating);
 
-  return (
-    <div className="movie-card__reviews movie-card__row">
-      <div className="movie-card__reviews-col">
+    let rightColumn;
+    let leftColumn;
 
-        {createReviewTemplate(leftColumn)}
+    let lengthReviews = Object.keys(reviews).length;
+    let midleCount = Math.round(lengthReviews / 2);
 
+    leftColumn = sortReviews.slice(0, midleCount);
+    rightColumn = sortReviews.slice(midleCount);
+
+    return (
+      <div className="movie-card__reviews movie-card__row">
+        <div className="movie-card__reviews-col">
+
+          {createReviewTemplate(leftColumn)}
+
+        </div>
+        <div className="movie-card__reviews-col">
+
+          {createReviewTemplate(rightColumn)}
+
+        </div>
       </div>
-      <div className="movie-card__reviews-col">
-
-        {createReviewTemplate(rightColumn)}
-
-      </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 TabFilmReview.propTypes = {
   reviews: PropTypes.arrayOf(reviewType).isRequired,
+  id: PropTypes.number.isRequired,
+  getReviews: PropTypes.func.isRequired,
+
 };
 
-export default TabFilmReview;
+
+const mapStateToProps = ({APP_PROCESS}) => {
+  return ({
+    reviews: APP_PROCESS.reviews,
+  });
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  getReviews(id) {
+    dispatch(fetchReviews(id));
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TabFilmReview);
