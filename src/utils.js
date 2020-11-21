@@ -1,5 +1,5 @@
 import moment from 'moment';
-import {ALL_GENRES} from "./const";
+import {ALL_GENRES, RatingFilms, SEC_PER_MINUTE} from "./const";
 
 
 export const getDuration = (minutes) => {
@@ -8,52 +8,6 @@ export const getDuration = (minutes) => {
   return moment.utc(duration.as(`milliseconds`)).format(format).toString();
 };
 export const getDateRevieFormat = (date) => moment(date).format(`LL`);
-
-export const generateId = () => `_` + Math.random().toString(36).substr(2, 9);
-
-export const getRandomInteger = (a = 0, b = 1) => {
-  const lower = Math.ceil(Math.min(a, b));
-  const upper = Math.floor(Math.max(a, b));
-
-  return Math.floor(lower + Math.random() * (upper - lower + 1));
-};
-
-export const getRandomArrayItem = (arr) => {
-  if (arr.length === 0) {
-    return undefined;
-  }
-
-  const randomIndex = getRandomInteger(0, arr.length - 1);
-
-  return arr[randomIndex];
-};
-
-export const getRandomArrayItems = function (info) {
-
-  if (info.length === 0) {
-    return undefined;
-  }
-
-  const restInformation = info.slice();
-  const countInformation = getRandomInteger(1, restInformation.length);
-  let newArray = [];
-  for (let i = 0; i < countInformation; i++) {
-    newArray.push(restInformation.splice(getRandomInteger(0, restInformation.length - 1), 1));
-  }
-
-  return newArray;
-};
-
-export const generateDate = (start, end) => {
-  return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-};
-
-export const getRandomFloat = (a = 1, b = 0) => {
-  const lower = Math.min(a, b);
-  const upper = Math.max(a, b);
-
-  return (lower + Math.random() * (upper - lower)).toFixed(1).replace(`.`, `,`);
-};
 
 export const sortReviewRating = (reviewA, reviewB) => {
   if (reviewA.rating > reviewB.rating) {
@@ -85,4 +39,27 @@ export const getVisibleFilms = (films, visibleFilmsCount) => films.slice(0, visi
 
 export const getVideoProgress = (video) => (Math.floor(video.currentTime) / (Math.floor(video.duration) / 100));
 
-export const getFormattedTime = (date) => moment(date).format(`HH:mm:ss`);
+export const getFormattedTime = (time) => {
+  time = Math.floor(time);
+  const minutes = Math.floor(time / SEC_PER_MINUTE);
+  const seconds = Math.floor(time - minutes * SEC_PER_MINUTE);
+
+  const minutesVal = minutes < 10 ? `0${minutes}` : String(minutes);
+  const secondsVal = seconds < 10 ? `0${seconds}` : String(seconds);
+
+  return `${minutesVal}:${secondsVal}`;
+};
+
+export const getFilmRank = (count) => {
+  if (count >= RatingFilms.BAD && count < RatingFilms.NORMAL) {
+    return `Bad`;
+  } else if (count >= RatingFilms.NORMAL && count < RatingFilms.GOOD) {
+    return `Normal`;
+  } else if (count >= RatingFilms.GOOD && count < RatingFilms.VERY_GOOD) {
+    return `Good`;
+  } else if (count >= RatingFilms.VERY_GOOD && count < RatingFilms.AWESOME) {
+    return `Very good`;
+  } else {
+    return `Awesome`;
+  }
+};

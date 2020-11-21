@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {filmType} from "../../types/film";
 import Tabs from "../tabs/tabs";
-import {reviewType} from "../../types/review";
 import ButtonPlayVideo from "../button-play-video/button-play-video";
 
 const LIKE_FILMS_MAX = 4;
@@ -30,12 +29,12 @@ const createMoreLikeTemplate = (likeFilms) => {
   );
 };
 
-const FilmScreen = ({films, match, reviews, handleButtonPlayVideo}) => {
+const FilmScreen = ({films, match, handleButtonPlayVideo}) => {
 
-  const id = match.params.id;
+  const id = Number(match.params.id);
   const currentFilm = films.find((film) => film.id === id);
 
-  const {title, genre, year, previewImage} = currentFilm;
+  const {title, genre, year, backgroundImage, poster} = currentFilm;
 
   let likeFilms = films.filter((film) => (film.genre === genre && film.id !== id)).slice(0, LIKE_FILMS_MAX);
 
@@ -45,7 +44,7 @@ const FilmScreen = ({films, match, reviews, handleButtonPlayVideo}) => {
       <section className="movie-card movie-card--full">
         <div className="movie-card__hero">
           <div className="movie-card__bg">
-            <img src={previewImage} alt={title} />
+            <img src={backgroundImage} alt={title} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -92,12 +91,12 @@ const FilmScreen = ({films, match, reviews, handleButtonPlayVideo}) => {
         <div className="movie-card__wrap movie-card__translate-top">
           <div className="movie-card__info">
             <div className="movie-card__poster movie-card__poster--big">
-              <img src={previewImage} alt={title} width="218" height="327" />
+              <img src={poster} alt={title} width="218" height="327" />
             </div>
 
             <div className="movie-card__desc">
 
-              <Tabs film={currentFilm} reviews={reviews} />
+              <Tabs film={currentFilm} />
 
             </div>
           </div>
@@ -138,7 +137,6 @@ const FilmScreen = ({films, match, reviews, handleButtonPlayVideo}) => {
 
 FilmScreen.propTypes = {
   films: PropTypes.arrayOf(filmType).isRequired,
-  reviews: PropTypes.arrayOf(reviewType).isRequired,
   onFilmCardClick: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired,
   handleButtonPlayVideo: PropTypes.func.isRequired,

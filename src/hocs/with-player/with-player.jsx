@@ -44,7 +44,7 @@ const withPlayer = (Component) => {
     componentDidMount() {
       const {films, match} = this.props;
       const video = this._videoRef.current;
-      const id = match.params.id;
+      const id = Number(match.params.id);
       const currentFilm = films.find((film) => film.id === id);
 
       if (!video) {
@@ -74,18 +74,18 @@ const withPlayer = (Component) => {
 
     _handleVideoTimeUpdate() {
       const video = this._videoRef.current;
-      this.setState({
-        videoCurrentTime: video.currentTime,
-      });
 
       this.setState({
+        videoCurrentTime: video.currentTime,
         progressPosition: getVideoProgress(video),
       });
+
     }
 
     render() {
       const {films, match, handlePlayerExitClick} = this.props;
-      const id = match.params.id;
+      const id = Number(match.params.id);
+
       const currentFilm = films.find((film) => film.id === id);
 
       const {isPlaying, videoCurrentTime, progressPosition} = this.state;
@@ -105,7 +105,7 @@ const withPlayer = (Component) => {
           <video
             ref={this._videoRef}
             className="player__video"
-            onTimeUpdate={this.ё}
+            onTimeUpdate={this._handleVideoTimeUpdate}
             poster={currentFilm.poster}
             muted
           />

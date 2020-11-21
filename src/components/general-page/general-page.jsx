@@ -8,7 +8,7 @@ import {filmType} from '../../types/film';
 
 const GeneralPage = ({films, onFilmCardClick, handleButtonPlayVideo}) => {
 
-  const {title, year, genre, previewImage, id} = films[0];
+  const {title, year, genre, id, backgroundImage, poster} = films[0];
 
   return (
     <React.Fragment>
@@ -39,7 +39,7 @@ const GeneralPage = ({films, onFilmCardClick, handleButtonPlayVideo}) => {
 
       <section className="movie-card">
         <div className="movie-card__bg">
-          <img src={previewImage} alt={title} />
+          <img src={backgroundImage} alt={title} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -63,7 +63,7 @@ const GeneralPage = ({films, onFilmCardClick, handleButtonPlayVideo}) => {
         <div className="movie-card__wrap">
           <div className="movie-card__info">
             <div className="movie-card__poster">
-              <img src={previewImage} alt={title} width="218" height="327" />
+              <img src={poster} alt={title} width="218" height="327" />
             </div>
 
             <div className="movie-card__desc">

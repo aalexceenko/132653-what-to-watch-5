@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import {filmType} from '../../types/film';
-import {reviewType} from '../../types/review';
 import {TabsType} from '../../const';
 import withTabs from "../../hocs/with-tabs/with-tabs";
 
@@ -30,7 +29,6 @@ const Tabs = ({activeTab, handleTabClick, renderContentForTab}) => {
 
 Tabs.propTypes = {
   film: filmType.isRequired,
-  reviews: PropTypes.arrayOf(reviewType).isRequired,
   activeTab: PropTypes.string.isRequired,
   handleTabClick: PropTypes.func.isRequired,
   renderContentForTab: PropTypes.func.isRequired,

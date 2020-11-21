@@ -8,8 +8,9 @@ import LoginScreen from "../login-screen/login-screen";
 import MyListScreen from "../my-list-screen/my-list-screen";
 import Player from "../player/player";
 import {filmType} from '../../types/film';
-import {reviewType} from '../../types/review';
 import withPlayer from "../../hocs/with-player/with-player";
+import {connect} from "react-redux";
+
 
 const PlayerWrapped = withPlayer(Player);
 
@@ -19,7 +20,7 @@ const AppRoute = {
   MY_LIST: `/mylist`,
 };
 
-const App = ({films, reviews}) => {
+const App = ({films}) => {
 
   return (
 
@@ -29,7 +30,6 @@ const App = ({films, reviews}) => {
           render={({history}) => (
             <GeneralPage
               films={films}
-              reviews={reviews}
               onFilmCardClick={(id) => history.push(`/films/${id}`)}
               handleButtonPlayVideo={(id) => history.push(`/player/${id}`)}
             />
@@ -45,7 +45,6 @@ const App = ({films, reviews}) => {
           render={({history, match}) => (
             <FilmScreen
               films={films}
-              reviews={reviews}
               match={match}
               onFilmCardClick={(id) => history.push(`/films/${id}`)}
               handleButtonPlayVideo={(id) => history.push(`/player/${id}`)}
@@ -54,7 +53,7 @@ const App = ({films, reviews}) => {
         />
         <Route exact path="/films/:id/review"
           render={({match}) => (
-            <AddReviewScreen films={films} reviews={reviews} match={match}/>
+            <AddReviewScreen films={films} match={match}/>
           )}
         />
         <Route exact path="/player/:id"
@@ -69,7 +68,12 @@ const App = ({films, reviews}) => {
 
 App.propTypes = {
   films: PropTypes.arrayOf(filmType).isRequired,
-  reviews: PropTypes.arrayOf(reviewType).isRequired,
 };
 
-export default App;
+const mapStateToProps = ({APP_PROCESS}) => ({
+  films: APP_PROCESS.films,
+});
+
+
+export default connect(mapStateToProps)(App);
+

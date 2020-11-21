@@ -16,7 +16,7 @@ const TabFilmOverview = ({description, rating, ratingText, director, votes, acto
       </div>
 
       <div className="movie-card__text">
-        <p>{description.join(` `)}</p>
+        <p>{description}</p>
 
         <p className="movie-card__director"><strong>Director: {director} </strong></p>
 
@@ -27,8 +27,8 @@ const TabFilmOverview = ({description, rating, ratingText, director, votes, acto
 };
 
 TabFilmOverview.propTypes = {
-  description: PropTypes.array.isRequired,
-  rating: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired,
   ratingText: PropTypes.string.isRequired,
   votes: PropTypes.number.isRequired,
   director: PropTypes.string.isRequired,
