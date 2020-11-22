@@ -20,11 +20,11 @@ export const ActionCreator = {
     type: ActionType.REQUIRED_AUTHORIZATION,
     payload: status
   }),
-  loadDataFilms: (films) => ({
+  loadFilms: (films) => ({
     type: ActionType.LOAD_DATA_FILMS,
     payload: films,
   }),
-  loadDataReviews: (reviews) => ({
+  loadReviews: (reviews) => ({
     type: ActionType.LOAD_DATA_REVIEWS,
     payload: reviews,
   }),

@@ -5,12 +5,12 @@ import {AuthorizationStatus, AppRoute, APIRoute} from "../const";
 
 export const fetchFilms = () => (dispatch, _getState, api) => (
   api.get(APIRoute.FILMS)
-    .then((response) => dispatch(ActionCreator.loadDataFilms(adaptFilmsToClient(response.data))))
+    .then((response) => dispatch(ActionCreator.loadFilms(adaptFilmsToClient(response.data))))
 );
 
 export const fetchReviews = (id) => (dispatch, _getState, api) => (
   api.get(`/comments/${id}`)
-    .then(({data}) => dispatch(ActionCreator.loadDataReviews(data)))
+    .then(({data}) => dispatch(ActionCreator.loadReviews(data)))
 );
 
 
