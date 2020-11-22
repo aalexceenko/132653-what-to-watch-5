@@ -5,7 +5,7 @@ import {createStore, applyMiddleware} from "redux";
 import {Provider} from "react-redux";
 import rootReducer from "./store/reducers";
 import {composeWithDevTools} from "redux-devtools-extension";
-
+import {redirect} from "./store/middlewares/redirect";
 import thunk from "redux-thunk";
 import {createAPI} from "./services/api";
 import {ActionCreator} from "./store/action";
@@ -19,7 +19,8 @@ const api = createAPI(
 const store = createStore(
     rootReducer,
     composeWithDevTools(
-        applyMiddleware(thunk.withExtraArgument(api))
+        applyMiddleware(thunk.withExtraArgument(api)),
+        applyMiddleware(redirect)
     ));
 
 
