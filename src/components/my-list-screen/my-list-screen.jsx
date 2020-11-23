@@ -1,4 +1,5 @@
 import React from "react";
+import UserBlock from "../user-block/user-block";
 
 const MyListScreen = () => {
 
@@ -15,11 +16,7 @@ const MyListScreen = () => {
 
         <h1 className="page-title user-page__title">My list</h1>
 
-        <div className="user-block">
-          <div className="user-block__avatar">
-            <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-          </div>
-        </div>
+        <UserBlock />
       </header>
 
       <section className="catalog">

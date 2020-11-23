@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {filmType} from '../../types/film';
 import withAddReviewScreen from "../../hocs/with-add-review-screen/with-add-review-screen";
+import UserBlock from "../user-block/user-block";
 
 
 const AddReviewScreen = ({textReview, handleSubmit, handleTextChange, handleStarClick, match, films}) => {
@@ -40,11 +41,7 @@ const AddReviewScreen = ({textReview, handleSubmit, handleTextChange, handleStar
             </ul>
           </nav>
 
-          <div className="user-block">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-            </div>
-          </div>
+          <UserBlock />
         </header>
 
         <div className="movie-card__poster movie-card__poster--small">

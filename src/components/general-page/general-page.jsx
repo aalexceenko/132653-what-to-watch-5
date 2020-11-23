@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import GenresList from "../genres-list/genres-list";
 import FilmListContainer from "../film-list-container/film-list-container";
 import ButtonPlayVideo from "../button-play-video/button-play-video";
+import UserBlock from "../user-block/user-block";
 import {filmType} from '../../types/film';
 
 
@@ -53,11 +54,8 @@ const GeneralPage = ({films, onFilmCardClick, handleButtonPlayVideo}) => {
             </a>
           </div>
 
-          <div className="user-block">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-            </div>
-          </div>
+          <UserBlock />
+
         </header>
 
         <div className="movie-card__wrap">
