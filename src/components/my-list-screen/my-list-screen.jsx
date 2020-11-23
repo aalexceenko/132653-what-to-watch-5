@@ -1,7 +1,35 @@
 import React from "react";
 import UserBlock from "../user-block/user-block";
+import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
+import {filmType} from "../../types/film";
 
-const MyListScreen = () => {
+const createMyListTemplate = (myList, onFilmCardClick) => {
+  return (
+    <React.Fragment>
+      {Object.values(myList.map((film, i) => {
+        const {id, previewImage, title} = film;
+        return (
+          <article className="small-movie-card catalog__movies-card" key={i}
+            onClick={() => onFilmCardClick(id)}
+          >
+            <div className="small-movie-card__image">
+              <img src={previewImage} alt={title} />
+            </div>
+            <h3 className="small-movie-card__title">
+              <Link className="small-movie-card__link" to={`/films/${id}`}>{title}</Link>
+            </h3>
+          </article>
+        );
+      }))}
+
+    </React.Fragment>
+  );
+};
+
+const MyListScreen = ({films, onFilmCardClick}) => {
+
+  let myListFilms = films.filter((film) => (film.myList === false));
 
   return (
     <div className="user-page">
@@ -23,88 +51,8 @@ const MyListScreen = () => {
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
         <div className="catalog__movies-list">
-          <article className="small-movie-card catalog__movies-card">
-            <div className="small-movie-card__image">
-              <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175" />
-            </div>
-            <h3 className="small-movie-card__title">
-              <a className="small-movie-card__link" href="movie-page.html">Fantastic Beasts: The Crimes of Grindelwald</a>
-            </h3>
-          </article>
+          {createMyListTemplate(myListFilms, onFilmCardClick)}
 
-          <article className="small-movie-card catalog__movies-card">
-            <div className="small-movie-card__image">
-              <img src="img/bohemian-rhapsody.jpg" alt="Bohemian Rhapsody" width="280" height="175" />
-            </div>
-            <h3 className="small-movie-card__title">
-              <a className="small-movie-card__link" href="movie-page.html">Bohemian Rhapsody</a>
-            </h3>
-          </article>
-
-          <article className="small-movie-card catalog__movies-card">
-            <div className="small-movie-card__image">
-              <img src="img/macbeth.jpg" alt="Macbeth" width="280" height="175" />
-            </div>
-            <h3 className="small-movie-card__title">
-              <a className="small-movie-card__link" href="movie-page.html">Macbeth</a>
-            </h3>
-          </article>
-
-          <article className="small-movie-card catalog__movies-card">
-            <div className="small-movie-card__image">
-              <img src="img/aviator.jpg" alt="Aviator" width="280" height="175" />
-            </div>
-            <h3 className="small-movie-card__title">
-              <a className="small-movie-card__link" href="movie-page.html">Aviator</a>
-            </h3>
-          </article>
-
-
-          <article className="small-movie-card catalog__movies-card">
-            <div className="small-movie-card__image">
-              <img src="img/we-need-to-talk-about-kevin.jpg" alt="We need to talk about Kevin" width="280" height="175" />
-            </div>
-            <h3 className="small-movie-card__title">
-              <a className="small-movie-card__link" href="movie-page.html">We need to talk about Kevin</a>
-            </h3>
-          </article>
-
-          <article className="small-movie-card catalog__movies-card">
-            <div className="small-movie-card__image">
-              <img src="img/what-we-do-in-the-shadows.jpg" alt="What We Do in the Shadows" width="280" height="175" />
-            </div>
-            <h3 className="small-movie-card__title">
-              <a className="small-movie-card__link" href="movie-page.html">What We Do in the Shadows</a>
-            </h3>
-          </article>
-
-          <article className="small-movie-card catalog__movies-card">
-            <div className="small-movie-card__image">
-              <img src="img/revenant.jpg" alt="Revenant" width="280" height="175" />
-            </div>
-            <h3 className="small-movie-card__title">
-              <a className="small-movie-card__link" href="movie-page.html">Revenant</a>
-            </h3>
-          </article>
-
-          <article className="small-movie-card catalog__movies-card">
-            <div className="small-movie-card__image">
-              <img src="img/johnny-english.jpg" alt="Johnny English" width="280" height="175" />
-            </div>
-            <h3 className="small-movie-card__title">
-              <a className="small-movie-card__link" href="movie-page.html">Johnny English</a>
-            </h3>
-          </article>
-
-
-          <article className="small-movie-card catalog__movies-card">
-            <div className="small-movie-card__image">
-              <img src="img/shutter-island.jpg" alt="Shutter Island" width="280" height="175" />
-            </div>
-            <h3 className="small-movie-card__title">
-              <a className="small-movie-card__link" href="movie-page.html">Shutter Island</a>
-            </h3>
-          </article>
         </div>
       </section>
 
@@ -124,6 +72,10 @@ const MyListScreen = () => {
     </div>
   );
 
+};
+MyListScreen.propTypes = {
+  films: PropTypes.arrayOf(filmType).isRequired,
+  onFilmCardClick: PropTypes.func.isRequired,
 };
 
 export default MyListScreen;

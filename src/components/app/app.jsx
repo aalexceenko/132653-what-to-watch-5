@@ -38,9 +38,14 @@ const App = ({films}) => {
         <Route exact path={AppRoute.LOGIN}>
           <LoginScreen />
         </Route>
-        <Route exact path={AppRoute.MY_LIST}>
-          <MyListScreen />
-        </Route>
+        <Route exact path={AppRoute.MY_LIST}
+          render={({history}) => (
+            <MyListScreen
+              films={films}
+              onFilmCardClick={(id) => history.push(`/films/${id}`)}
+            />
+          )}
+        />
         <Route exact path="/films/:id"
           render={({history, match}) => (
             <FilmScreen
