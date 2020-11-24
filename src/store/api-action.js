@@ -1,26 +1,27 @@
 import {ActionCreator} from "./action";
-import {AuthorizationStatus} from "../const";
 import {adaptFilmsToClient} from "../services/adapter";
+import {AuthorizationStatus, AppRoute, APIRoute} from "../const";
 
 
 export const fetchFilms = () => (dispatch, _getState, api) => (
-  api.get(`/films`)
-    .then((response) => dispatch(ActionCreator.loadDataFilms(adaptFilmsToClient(response.data))))
+  api.get(APIRoute.FILMS)
+    .then((response) => dispatch(ActionCreator.loadFilms(adaptFilmsToClient(response.data))))
 );
 
 export const fetchReviews = (id) => (dispatch, _getState, api) => (
   api.get(`/comments/${id}`)
-    .then(({data}) => dispatch(ActionCreator.loadDataReviews(data)))
+    .then(({data}) => dispatch(ActionCreator.loadReviews(data)))
 );
 
 
 export const checkAuth = () => (dispatch, _getState, api) => (
-  api.get(`/login`)
+  api.get(APIRoute.LOGIN)
     .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
     .catch(() => {})
 );
 
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (
-  api.post(`/login`, {email, password})
+  api.post(APIRoute.LOGIN, {email, password})
     .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
+    .then(() => dispatch(ActionCreator.redirectToRoute(AppRoute.ROOT)))
 );

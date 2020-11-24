@@ -20,6 +20,4 @@ const adapter = (film) => ({
   myList: film.is_favorite,
 });
 
-export const adaptFilmsToClient = (data) => {
-  return data.map(adapter);
-};
+export const adaptFilmsToClient = (data) => data.map(adapter);

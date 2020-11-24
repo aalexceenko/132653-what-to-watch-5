@@ -4,6 +4,7 @@ export const ActionType = {
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   LOAD_DATA_FILMS: `LOAD_DATA_FILMS`,
   LOAD_DATA_REVIEWS: `LOAD_DATA_REVIEWS`,
+  REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
 };
 
 export const ActionCreator = {
@@ -19,13 +20,17 @@ export const ActionCreator = {
     type: ActionType.REQUIRED_AUTHORIZATION,
     payload: status
   }),
-  loadDataFilms: (films) => ({
+  loadFilms: (films) => ({
     type: ActionType.LOAD_DATA_FILMS,
     payload: films,
   }),
-  loadDataReviews: (reviews) => ({
+  loadReviews: (reviews) => ({
     type: ActionType.LOAD_DATA_REVIEWS,
     payload: reviews,
+  }),
+  redirectToRoute: (url) => ({
+    type: ActionType.REDIRECT_TO_ROUTE,
+    payload: url,
   })
 };
 
