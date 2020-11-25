@@ -12,6 +12,7 @@ import withPlayer from "../../hocs/with-player/with-player";
 import {connect} from "react-redux";
 import browserHistory from "../../browser-history";
 import {AppRoute} from "../../const";
+import PrivateRoute from "../private-route/private-route";
 
 
 const PlayerWrapped = withPlayer(Player);
@@ -34,7 +35,7 @@ const App = ({films}) => {
         <Route exact path={AppRoute.LOGIN}>
           <LoginScreen />
         </Route>
-        <Route exact path={AppRoute.MY_LIST}
+        <PrivateRoute exact path={AppRoute.MY_LIST}
           render={({history}) => (
             <MyListScreen
               films={films}
@@ -52,7 +53,7 @@ const App = ({films}) => {
             />
           )}
         />
-        <Route exact path="/films/:id/review"
+        <PrivateRoute exact path="/films/:id/review"
           render={({match}) => (
             <AddReviewScreen films={films} match={match}/>
           )}
