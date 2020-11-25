@@ -23,4 +23,13 @@ export const RatingFilms = {
 
 export const SEC_PER_MINUTE = 60;
 
+export const AppRoute = {
+  ROOT: `/`,
+  LOGIN: `/login`,
+  MY_LIST: `/mylist`,
+};
 
+export const APIRoute = {
+  FILMS: `/films`,
+  LOGIN: `/login`,
+};

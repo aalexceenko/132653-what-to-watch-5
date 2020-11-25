@@ -1,7 +1,7 @@
 import React from "react";
 import GeneralPage from "../general-page/general-page";
 import PropTypes from "prop-types";
-import {Switch, Route, BrowserRouter} from "react-router-dom";
+import {Switch, Route, Router as BrowserRouter} from "react-router-dom";
 import AddReviewScreen from "../add-review-screen/add-review-screen";
 import FilmScreen from "../film-screen/film-screen";
 import LoginScreen from "../login-screen/login-screen";
@@ -10,23 +10,19 @@ import Player from "../player/player";
 import {filmType} from '../../types/film';
 import withPlayer from "../../hocs/with-player/with-player";
 import {connect} from "react-redux";
+import browserHistory from "../../browser-history";
+import {AppRoute} from "../../const";
 
 
 const PlayerWrapped = withPlayer(Player);
-
-const AppRoute = {
-  DEFAULT: `/`,
-  LOGIN: `/login`,
-  MY_LIST: `/mylist`,
-};
 
 const App = ({films}) => {
 
   return (
 
-    <BrowserRouter>
+    <BrowserRouter history={browserHistory}>
       <Switch>
-        <Route exact path={AppRoute.DEFAULT}
+        <Route exact path={AppRoute.ROOT}
           render={({history}) => (
             <GeneralPage
               films={films}
