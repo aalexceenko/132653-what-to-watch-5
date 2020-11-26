@@ -21,11 +21,11 @@ const appProcess = (state = initialState, action) => {
       return extend(state, {
         visibleFilmsCount: action.payload,
       });
-    case ActionType.LOAD_DATA_FILMS:
+    case ActionType.LOAD_FILMS:
       return extend(state, {
         films: action.payload,
       });
-    case ActionType.LOAD_DATA_REVIEWS:
+    case ActionType.LOAD_REVIEWS:
       return extend(state, {
         reviews: action.payload,
       });

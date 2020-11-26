@@ -2,8 +2,8 @@ export const ActionType = {
   CHANGE_ACTIVE_GENRE: `CHANGE_GENRE`,
   SHOW_MORE_FILMS: `SHOW_MORE_FILMS`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
-  LOAD_DATA_FILMS: `LOAD_DATA_FILMS`,
-  LOAD_DATA_REVIEWS: `LOAD_DATA_REVIEWS`,
+  LOAD_FILMS: `LOAD_FILMS`,
+  LOAD_REVIEWS: `LOAD_REVIEWS`,
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
 };
 
@@ -21,11 +21,11 @@ export const ActionCreator = {
     payload: status
   }),
   loadFilms: (films) => ({
-    type: ActionType.LOAD_DATA_FILMS,
+    type: ActionType.LOAD_FILMS,
     payload: films,
   }),
   loadReviews: (reviews) => ({
-    type: ActionType.LOAD_DATA_REVIEWS,
+    type: ActionType.LOAD_REVIEWS,
     payload: reviews,
   }),
   redirectToRoute: (url) => ({

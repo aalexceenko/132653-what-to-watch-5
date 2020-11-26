@@ -1,22 +1,24 @@
 import React from "react";
-import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
+import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 import {filmType} from '../../types/film';
 import withAddReviewScreen from "../../hocs/with-add-review-screen/with-add-review-screen";
 import UserBlock from "../user-block/user-block";
+import {postReview} from "../../store/api-action";
+import {connect} from "react-redux";
 
 
 const AddReviewScreen = ({textReview, handleSubmit, handleTextChange, handleStarClick, match, films}) => {
 
-  const id = match.params.id;
+  const id = Number(match.params.id);
   const currentFilm = films.find((film) => film.id === id);
-  const {title, previewImage} = currentFilm;
+  const {title, poster, backgroundImage} = currentFilm;
 
   return (
     <section className="movie-card movie-card--full">
       <div className="movie-card__header">
         <div className="movie-card__bg">
-          <img src={previewImage} alt={title} />
+          <img src={backgroundImage} alt={title} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -45,12 +47,11 @@ const AddReviewScreen = ({textReview, handleSubmit, handleTextChange, handleStar
         </header>
 
         <div className="movie-card__poster movie-card__poster--small">
-          <img src={previewImage} alt={title} width="218" height="327" />
+          <img src={poster} alt={title} width="218" height="327" />
         </div>
       </div>
-
       <div className="add-review">
-        <form action="#" className="add-review__form" onSubmit={handleSubmit}>
+        <form action="" className={`add-review__form  `} onSubmit={handleSubmit}>
           <div className="rating">
             <div className="rating__stars">
               <input className="rating__input" id="star-1" type="radio" name="rating" value="1" onChange={handleStarClick}/>
@@ -96,4 +97,12 @@ AddReviewScreen.propTypes = {
   handleStarClick: PropTypes.func.isRequired,
 };
 
-export default withAddReviewScreen(AddReviewScreen);
+const mapStateToProps = ({APP_PROCESS}) => ({
+  films: APP_PROCESS.films,
+});
+
+const mapDispatchToProps = () => ({
+  onSubmit: postReview,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withAddReviewScreen(AddReviewScreen));

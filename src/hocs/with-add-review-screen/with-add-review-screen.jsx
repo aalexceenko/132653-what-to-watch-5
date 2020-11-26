@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
 const withAddReviewScreen = (Component) => {
   class WithAddReviewScreen extends React.PureComponent {
@@ -13,10 +14,19 @@ const withAddReviewScreen = (Component) => {
       this._handleSubmit = this._handleSubmit.bind(this);
       this._handleTextChange = this._handleTextChange.bind(this);
       this._handleStarClick = this._handleStarClick.bind(this);
+      this.id = Number(this.props.match.params.id);
+      this.onSubmit = this.props.onSubmit;
     }
 
     _handleSubmit(evt) {
       evt.preventDefault();
+
+      const ratingStarsChecked = this.state.ratingStarsChecked;
+      const textReview = this.state.textReview;
+
+      debugger;
+      this.onSubmit(ratingStarsChecked, textReview, this.id);
+
     }
 
     _handleTextChange(evt) {
@@ -45,6 +55,11 @@ const withAddReviewScreen = (Component) => {
       );
     }
   }
+
+  WithAddReviewScreen.propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+    match: PropTypes.object.isRequired,
+  };
 
   return WithAddReviewScreen;
 };
