@@ -6,7 +6,18 @@ import browserHistory from "../browser-history";
 
 export const fetchFilms = () => (dispatch, _getState, api) => (
   api.get(APIRoute.FILMS)
-    .then((response) => dispatch(ActionCreator.loadFilms(adaptFilmsToClient(response.data))))
+    .then(({data}) => {
+      const movies = data.map((film) => adaptFilmsToClient(film));
+      dispatch(ActionCreator.loadFilms(movies));
+    })
+);
+
+export const fetchFilmPromo = () => (dispatch, _getState, api) => (
+  api.get(APIRoute.FILM_PROMO)
+    .then(({data}) => {
+      const filmPromo = adaptFilmsToClient(data);
+      dispatch(ActionCreator.loadFilmPromo(filmPromo));
+    })
 );
 
 export const fetchReviews = (id) => (dispatch, _getState, api) => (
@@ -23,6 +34,13 @@ export const postReview = (ratingStarsChecked, textReview, id) => (dispatch, _ge
     .catch((err) => {
       throw err;
     });
+};
+
+export const changeMyList = (id, status) => (dispatch, _getState, axios) => {
+  axios.post(`/favorite/${id}/${status}`)
+    .then(() => fetchFilms(dispatch, axios))
+    .then(() => fetchFilmPromo(dispatch, axios))
+    .catch(() => {});
 };
 
 export const checkAuth = () => (dispatch, _getState, api) => (

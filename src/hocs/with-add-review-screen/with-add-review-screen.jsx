@@ -24,7 +24,7 @@ const withAddReviewScreen = (Component) => {
       const ratingStarsChecked = this.state.ratingStarsChecked;
       const textReview = this.state.textReview;
 
-      debugger;
+      // debugger;
       this.onSubmit(ratingStarsChecked, textReview, this.id);
 
     }

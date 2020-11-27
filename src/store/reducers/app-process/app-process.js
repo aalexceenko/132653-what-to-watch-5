@@ -7,6 +7,7 @@ const initialState = {
   activeGenre: ALL_GENRES,
   films: [],
   reviews: [],
+  filmPromo: [],
   visibleFilmsCount: FILM_COUNT_STEP,
 };
 
@@ -28,6 +29,10 @@ const appProcess = (state = initialState, action) => {
     case ActionType.LOAD_REVIEWS:
       return extend(state, {
         reviews: action.payload,
+      });
+    case ActionType.LOAD_FILM_PROMO:
+      return extend(state, {
+        filmPromo: action.payload,
       });
   }
 

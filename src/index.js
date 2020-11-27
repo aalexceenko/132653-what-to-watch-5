@@ -9,7 +9,7 @@ import {redirect} from "./store/middlewares/redirect";
 import thunk from "redux-thunk";
 import {createAPI} from "./services/api";
 import {ActionCreator} from "./store/action";
-import {fetchFilms, checkAuth} from "./store/api-action";
+import {fetchFilms, checkAuth, fetchFilmPromo} from "./store/api-action";
 import {AuthorizationStatus} from "./const";
 
 const api = createAPI(
@@ -27,6 +27,7 @@ const store = createStore(
 Promise.all([
   store.dispatch(fetchFilms()),
   store.dispatch(checkAuth()),
+  store.dispatch(fetchFilmPromo()),
 ])
   .then(() => {
     ReactDOM.render(

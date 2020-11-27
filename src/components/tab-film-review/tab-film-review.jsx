@@ -6,7 +6,7 @@ import {fetchReviews} from "../../store/api-action";
 import {connect} from "react-redux";
 
 const createReviewTemplate = (reviews) => {
-  console.log(reviews);
+
   return (
     <React.Fragment>
       {Object.values(reviews.map((review, i) => {
@@ -38,7 +38,6 @@ class TabFilmReview extends React.PureComponent {
   render() {
 
     const {reviews} = this.props;
-    console.log(reviews);
 
     let sortReviews = reviews.slice().sort(sortReviewRating);
 

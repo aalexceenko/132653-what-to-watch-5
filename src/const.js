@@ -32,4 +32,5 @@ export const AppRoute = {
 export const APIRoute = {
   FILMS: `/films`,
   LOGIN: `/login`,
+  FILM_PROMO: `/films/promo`,
 };
