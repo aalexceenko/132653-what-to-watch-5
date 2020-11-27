@@ -1,32 +1,10 @@
 import React from "react";
 import UserBlock from "../user-block/user-block";
 import PropTypes from "prop-types";
-import {Link} from "react-router-dom";
 import {filmType} from "../../types/film";
 import Logo from "../logo/logo";
+import FilmCard from '../film-card/film-card';
 
-const createMyListTemplate = (myList, onFilmCardClick) => {
-  return (
-    <React.Fragment>
-      {Object.values(myList.map((film, i) => {
-        const {id, previewImage, title} = film;
-        return (
-          <article className="small-movie-card catalog__movies-card" key={i}
-            onClick={() => onFilmCardClick(id)}
-          >
-            <div className="small-movie-card__image">
-              <img src={previewImage} alt={title} />
-            </div>
-            <h3 className="small-movie-card__title">
-              <Link className="small-movie-card__link" to={`/films/${id}`}>{title}</Link>
-            </h3>
-          </article>
-        );
-      }))}
-
-    </React.Fragment>
-  );
-};
 
 const MyListScreen = ({films, onFilmCardClick}) => {
 
@@ -46,7 +24,9 @@ const MyListScreen = ({films, onFilmCardClick}) => {
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
         <div className="catalog__movies-list">
-          {createMyListTemplate(myListFilms, onFilmCardClick)}
+          {myListFilms.map((film) => (
+            <FilmCard key={film.id} film={film} onFilmCardClick={onFilmCardClick} />
+          ))}
 
         </div>
       </section>

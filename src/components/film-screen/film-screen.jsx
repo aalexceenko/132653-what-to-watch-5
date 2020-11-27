@@ -7,33 +7,11 @@ import ButtonPlayVideo from "../button-play-video/button-play-video";
 import UserBlock from "../user-block/user-block";
 import MyListButton from "../my-list-button/my-list-button";
 import Logo from "../logo/logo";
+import {LIKE_FILMS_MAX} from "../../const";
+import FilmCard from '../film-card/film-card';
 
 
-const LIKE_FILMS_MAX = 4;
-
-
-const createMoreLikeTemplate = (likeFilms) => {
-  return (
-    <React.Fragment>
-      {Object.values(likeFilms.map((film, i) => {
-        const {id, previewImage, title} = film;
-        return (
-          <article className="small-movie-card catalog__movies-card" key={i}>
-            <div className="small-movie-card__image">
-              <img src={previewImage} alt={title} />
-            </div>
-            <h3 className="small-movie-card__title">
-              <Link className="small-movie-card__link" to={`/films/${id}`}>{title}</Link>
-            </h3>
-          </article>
-        );
-      }))}
-
-    </React.Fragment>
-  );
-};
-
-const FilmScreen = ({films, match, handleButtonPlayVideo}) => {
+const FilmScreen = ({films, match, handleButtonPlayVideo, onFilmCardClick}) => {
 
   const id = Number(match.params.id);
   const currentFilm = films.find((film) => film.id === id);
@@ -100,7 +78,9 @@ const FilmScreen = ({films, match, handleButtonPlayVideo}) => {
 
           <div className="catalog__movies-list">
 
-            {createMoreLikeTemplate(likeFilms)}
+            {likeFilms.map((film) => (
+              <FilmCard key={film.id} film={film} onFilmCardClick={onFilmCardClick} />
+            ))}
 
           </div>
         </section>

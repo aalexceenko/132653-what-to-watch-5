@@ -8,6 +8,8 @@ export const ALL_GENRES = `All genres`;
 
 export const FILM_COUNT_STEP = 8;
 
+export const LIKE_FILMS_MAX = 4;
+
 export const AuthorizationStatus = {
   AUTH: `AUTH`,
   NO_AUTH: `NO_AUTH`,
