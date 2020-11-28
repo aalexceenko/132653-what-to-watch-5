@@ -7,8 +7,8 @@ import browserHistory from "../browser-history";
 export const fetchFilms = () => (dispatch, _getState, api) => (
   api.get(APIRoute.FILMS)
     .then(({data}) => {
-      const movies = data.map((film) => adaptFilmsToClient(film));
-      dispatch(ActionCreator.loadFilms(movies));
+      const films = data.map((film) => adaptFilmsToClient(film));
+      dispatch(ActionCreator.loadFilms(films));
     })
 );
 
@@ -38,8 +38,8 @@ export const postReview = (ratingStarsChecked, textReview, id) => (dispatch, _ge
 
 export const changeMyList = (id, status) => (dispatch, _getState, axios) => {
   axios.post(`/favorite/${id}/${status}`)
-    .then(() => fetchFilms(dispatch, axios))
-    .then(() => fetchFilmPromo(dispatch, axios))
+    .then(() => dispatch(fetchFilms()))
+    .then(() => dispatch(fetchFilmPromo()))
     .catch(() => {});
 };
 

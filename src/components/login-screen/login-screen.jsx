@@ -54,7 +54,7 @@ class LoginScreen extends React.PureComponent {
         </div>
 
         <footer className="page-footer">
-          <Logo />
+          <Logo isFooter={true} />
 
           <div className="copyright">
             <p>© 2019 What to watch Ltd.</p>

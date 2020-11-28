@@ -86,7 +86,7 @@ const FilmScreen = ({films, match, handleButtonPlayVideo, onFilmCardClick}) => {
         </section>
 
         <footer className="page-footer">
-          <Logo />
+          <Logo isFooter={true} />
 
           <div className="copyright">
             <p>© 2019 What to watch Ltd.</p>

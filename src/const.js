@@ -25,6 +25,11 @@ export const RatingFilms = {
 
 export const SEC_PER_MINUTE = 60;
 
+export const SHAKE_ANIMATION_TIMEOUT = 600;
+
+export const MAX_COUNT_GENRES = 10;
+
+
 export const AppRoute = {
   ROOT: `/`,
   LOGIN: `/login`,

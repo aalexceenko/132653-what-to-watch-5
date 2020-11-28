@@ -48,7 +48,7 @@ const GeneralPage = ({onFilmCardClick, handleButtonPlayVideo}) => {
         </section>
 
         <footer className="page-footer">
-          <Logo />
+          <Logo isFooter={true} />
 
           <div className="copyright">
             <p>© 2019 What to watch Ltd.</p>

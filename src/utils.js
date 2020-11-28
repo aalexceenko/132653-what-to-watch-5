@@ -1,5 +1,5 @@
 import moment from 'moment';
-import {ALL_GENRES, RatingFilms, SEC_PER_MINUTE} from "./const";
+import {ALL_GENRES, RatingFilms, SEC_PER_MINUTE, MAX_COUNT_GENRES} from "./const";
 
 
 export const getDuration = (minutes) => {
@@ -30,7 +30,7 @@ export const getFilmsByGenre = (films, genre) => {
 export const getGenres = (films) => {
   const genres = films.map((film) => film.genre);
 
-  return [ALL_GENRES, ...new Set(genres)];
+  return [ALL_GENRES, ...new Set(genres)].slice(0, MAX_COUNT_GENRES);
 };
 
 export const isShowMoreButton = (films, visibleFilmsCount) => films.length > visibleFilmsCount;
@@ -63,3 +63,6 @@ export const getFilmRank = (count) => {
     return `Awesome`;
   }
 };
+
+export const checkTextValidation = (text) => !(text.length >= 50 && text.length <= 400);
+

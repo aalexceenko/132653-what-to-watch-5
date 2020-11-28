@@ -1,18 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {filmType} from "../../types/film";
 import {connect} from 'react-redux';
 import {changeMyList} from '../../store/api-action';
+import withMyListButton from "../../hocs/with-my-list-button/with-my-list-button";
 
 
-const MyListButton = ({film, changeMyListAction}) => {
-  const {myList, id} = film;
+const MyListButton = ({myList, handleClick}) => {
 
   return (
     <button
       className="btn btn--list movie-card__button"
       type="button"
-      onClick={changeMyListAction(id, Number(!myList))}
+      onClick={handleClick}
     >
 
       { myList
@@ -33,8 +32,14 @@ const MyListButton = ({film, changeMyListAction}) => {
 };
 
 MyListButton.propTypes = {
-  changeMyListAction: PropTypes.func.isRequired,
-  film: filmType,
+  myList: PropTypes.bool.isRequired,
+  handleClick: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = ({APP_PROCESS}) => {
+  return ({
+    myList: APP_PROCESS.myList,
+  });
 };
 
 const mapDispatchToProps = (dispatch) => ({
@@ -44,6 +49,5 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 
-export default connect(null, mapDispatchToProps)(MyListButton);
-
+export default connect(mapStateToProps, mapDispatchToProps)(withMyListButton(MyListButton));
 

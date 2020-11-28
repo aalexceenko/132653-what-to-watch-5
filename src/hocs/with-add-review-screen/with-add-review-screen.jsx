@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import {checkTextValidation} from "../../utils";
+import {SHAKE_ANIMATION_TIMEOUT} from "../../const";
 
 const withAddReviewScreen = (Component) => {
   class WithAddReviewScreen extends React.PureComponent {
@@ -9,6 +11,9 @@ const withAddReviewScreen = (Component) => {
       this.state = {
         ratingStarsChecked: 3,
         textReview: ``,
+        disabledButton: true,
+        disabledTextArea: false,
+        errorShake: false,
       };
 
       this._handleSubmit = this._handleSubmit.bind(this);
@@ -24,14 +29,31 @@ const withAddReviewScreen = (Component) => {
       const ratingStarsChecked = this.state.ratingStarsChecked;
       const textReview = this.state.textReview;
 
-      // debugger;
-      this.onSubmit(ratingStarsChecked, textReview, this.id);
+      this.setState({
+        disabledButton: true,
+        disabledTextArea: true,
+      });
 
+      this.onSubmit(ratingStarsChecked, textReview, this.id)
+        .catch(() => {
+          this.setState({
+            disabledButton: false,
+            disabledTextArea: false,
+          });
+          this._reportError();
+        });
+
+    }
+
+    _reportError() {
+      this.setState({errorShake: true});
+      setTimeout(() => this.setState({errorShake: false}), SHAKE_ANIMATION_TIMEOUT);
     }
 
     _handleTextChange(evt) {
       this.setState({
         textReview: evt.target.value,
+        disabledButton: checkTextValidation(evt.target.value),
       });
     }
 
@@ -46,8 +68,12 @@ const withAddReviewScreen = (Component) => {
       return (
         <Component
           {...this.props}
+          id={this.id}
           ratingStarsChecked={this.state.ratingStarsChecked}
           textReview={this.state.textReview}
+          errorShake={this.state.errorShake}
+          disabledButton={this.state.disabledButton}
+          disabledTextArea={this.state.disabledTextArea}
           handleSubmit={this._handleSubmit}
           handleTextChange={this._handleTextChange}
           handleStarClick={this._handleStarClick}
