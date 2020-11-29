@@ -9,7 +9,7 @@ import {connect} from "react-redux";
 import Logo from "../logo/logo";
 
 
-const AddReviewScreen = ({textReview, handleSubmit, handleTextChange, handleStarClick, match, films, disabledButton, disabledTextArea, errorShake}) => {
+const AddReviewScreen = ({textReview, handleSubmit, handleTextChange, handleStarClick, match, films, disabledButton, isError}) => {
 
   const id = Number(match.params.id);
   const currentFilm = films.find((film) => film.id === id);
@@ -46,7 +46,7 @@ const AddReviewScreen = ({textReview, handleSubmit, handleTextChange, handleStar
         </div>
       </div>
       <div className="add-review">
-        <form action="" className={`add-review__form ${errorShake ? `shake` : ``} `} onSubmit={handleSubmit}>
+        <form action="" className={`add-review__form ${isError ? `shake` : ``} `} onSubmit={handleSubmit}>
           <div className="rating">
             <div className="rating__stars">
               <input className="rating__input" id="star-1" type="radio" name="rating" value="1" onChange={handleStarClick}/>
@@ -68,8 +68,7 @@ const AddReviewScreen = ({textReview, handleSubmit, handleTextChange, handleStar
 
           <div className="add-review__text">
             <textarea className="add-review__textarea" value={textReview} name="review-text" id="review-text" placeholder="Review text"
-              onChange={handleTextChange}
-              disabled={disabledTextArea} />
+              onChange={handleTextChange} />
             <div className="add-review__submit">
               <button className="add-review__btn" disabled={disabledButton} type="submit">Post</button>
             </div>
@@ -93,8 +92,7 @@ AddReviewScreen.propTypes = {
   handleStarClick: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
   disabledButton: PropTypes.bool.isRequired,
-  disabledTextArea: PropTypes.bool.isRequired,
-  errorShake: PropTypes.bool.isRequired,
+  isError: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = ({APP_PROCESS}) => ({

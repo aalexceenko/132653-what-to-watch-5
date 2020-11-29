@@ -5,7 +5,7 @@ import {changeMyList} from '../../store/api-action';
 import withMyListButton from "../../hocs/with-my-list-button/with-my-list-button";
 
 
-const MyListButton = ({myList, handleClick}) => {
+const MyListButton = ({isInMyList, handleClick}) => {
 
   return (
     <button
@@ -14,7 +14,7 @@ const MyListButton = ({myList, handleClick}) => {
       onClick={handleClick}
     >
 
-      { myList
+      { isInMyList
         ?
         <svg viewBox="0 0 18 14" width="18" height="14">
           <use xlinkHref="#in-list"></use>
@@ -32,14 +32,8 @@ const MyListButton = ({myList, handleClick}) => {
 };
 
 MyListButton.propTypes = {
-  myList: PropTypes.bool.isRequired,
+  isInMyList: PropTypes.bool.isRequired,
   handleClick: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = ({APP_PROCESS}) => {
-  return ({
-    myList: APP_PROCESS.myList,
-  });
 };
 
 const mapDispatchToProps = (dispatch) => ({
@@ -49,5 +43,5 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(withMyListButton(MyListButton));
+export default connect(null, mapDispatchToProps)(withMyListButton(MyListButton));
 

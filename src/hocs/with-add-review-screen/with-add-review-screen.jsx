@@ -12,8 +12,7 @@ const withAddReviewScreen = (Component) => {
         ratingStarsChecked: 3,
         textReview: ``,
         disabledButton: true,
-        disabledTextArea: false,
-        errorShake: false,
+        isError: false,
       };
 
       this._handleSubmit = this._handleSubmit.bind(this);
@@ -26,19 +25,16 @@ const withAddReviewScreen = (Component) => {
     _handleSubmit(evt) {
       evt.preventDefault();
 
-      const ratingStarsChecked = this.state.ratingStarsChecked;
-      const textReview = this.state.textReview;
+      const {ratingStarsChecked, textReview} = this.state;
 
       this.setState({
         disabledButton: true,
-        disabledTextArea: true,
       });
 
       this.onSubmit(ratingStarsChecked, textReview, this.id)
         .catch(() => {
           this.setState({
             disabledButton: false,
-            disabledTextArea: false,
           });
           this._reportError();
         });
@@ -46,8 +42,8 @@ const withAddReviewScreen = (Component) => {
     }
 
     _reportError() {
-      this.setState({errorShake: true});
-      setTimeout(() => this.setState({errorShake: false}), SHAKE_ANIMATION_TIMEOUT);
+      this.setState({isError: true});
+      setTimeout(() => this.setState({isError: false}), SHAKE_ANIMATION_TIMEOUT);
     }
 
     _handleTextChange(evt) {
@@ -65,15 +61,16 @@ const withAddReviewScreen = (Component) => {
 
     render() {
 
+      const {ratingStarsChecked, textReview, isError, disabledButton} = this.state;
+
       return (
         <Component
           {...this.props}
           id={this.id}
-          ratingStarsChecked={this.state.ratingStarsChecked}
-          textReview={this.state.textReview}
-          errorShake={this.state.errorShake}
-          disabledButton={this.state.disabledButton}
-          disabledTextArea={this.state.disabledTextArea}
+          ratingStarsChecked={ratingStarsChecked}
+          textReview={textReview}
+          isError={isError}
+          disabledButton={disabledButton}
           handleSubmit={this._handleSubmit}
           handleTextChange={this._handleTextChange}
           handleStarClick={this._handleStarClick}
