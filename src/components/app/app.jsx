@@ -12,11 +12,12 @@ import withPlayer from "../../hocs/with-player/with-player";
 import {connect} from "react-redux";
 import browserHistory from "../../browser-history";
 import {AppRoute} from "../../const";
+import PrivateRoute from "../private-route/private-route";
 
 
 const PlayerWrapped = withPlayer(Player);
 
-const App = ({films}) => {
+const App = ({films, filmPromo}) => {
 
   return (
 
@@ -26,6 +27,7 @@ const App = ({films}) => {
           render={({history}) => (
             <GeneralPage
               films={films}
+              filmPromo={filmPromo}
               onFilmCardClick={(id) => history.push(`/films/${id}`)}
               handleButtonPlayVideo={(id) => history.push(`/player/${id}`)}
             />
@@ -34,9 +36,14 @@ const App = ({films}) => {
         <Route exact path={AppRoute.LOGIN}>
           <LoginScreen />
         </Route>
-        <Route exact path={AppRoute.MY_LIST}>
-          <MyListScreen />
-        </Route>
+        <PrivateRoute exact path={AppRoute.MY_LIST}
+          render={({history}) => (
+            <MyListScreen
+              films={films}
+              onFilmCardClick={(id) => history.push(`/films/${id}`)}
+            />
+          )}
+        />
         <Route exact path="/films/:id"
           render={({history, match}) => (
             <FilmScreen
@@ -47,7 +54,7 @@ const App = ({films}) => {
             />
           )}
         />
-        <Route exact path="/films/:id/review"
+        <PrivateRoute exact path="/films/:id/review"
           render={({match}) => (
             <AddReviewScreen films={films} match={match}/>
           )}
@@ -64,10 +71,12 @@ const App = ({films}) => {
 
 App.propTypes = {
   films: PropTypes.arrayOf(filmType).isRequired,
+  filmPromo: filmType.isRequired,
 };
 
 const mapStateToProps = ({APP_PROCESS}) => ({
   films: APP_PROCESS.films,
+  filmPromo: APP_PROCESS.filmPromo,
 });
 
 

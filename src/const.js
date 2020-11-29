@@ -8,6 +8,8 @@ export const ALL_GENRES = `All genres`;
 
 export const FILM_COUNT_STEP = 8;
 
+export const LIKE_FILMS_MAX = 4;
+
 export const AuthorizationStatus = {
   AUTH: `AUTH`,
   NO_AUTH: `NO_AUTH`,
@@ -23,6 +25,11 @@ export const RatingFilms = {
 
 export const SEC_PER_MINUTE = 60;
 
+export const SHAKE_ANIMATION_TIMEOUT = 600;
+
+export const MAX_COUNT_GENRES = 10;
+
+
 export const AppRoute = {
   ROOT: `/`,
   LOGIN: `/login`,
@@ -32,4 +39,5 @@ export const AppRoute = {
 export const APIRoute = {
   FILMS: `/films`,
   LOGIN: `/login`,
+  FILM_PROMO: `/films/promo`,
 };

@@ -1,33 +1,31 @@
 import React from "react";
-import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
+import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 import {filmType} from '../../types/film';
 import withAddReviewScreen from "../../hocs/with-add-review-screen/with-add-review-screen";
+import UserBlock from "../user-block/user-block";
+import {postReview} from "../../store/api-action";
+import {connect} from "react-redux";
+import Logo from "../logo/logo";
 
 
-const AddReviewScreen = ({textReview, handleSubmit, handleTextChange, handleStarClick, match, films}) => {
+const AddReviewScreen = ({textReview, handleSubmit, handleTextChange, handleStarClick, match, films, disabledButton, disabledTextArea, errorShake}) => {
 
-  const id = match.params.id;
+  const id = Number(match.params.id);
   const currentFilm = films.find((film) => film.id === id);
-  const {title, previewImage} = currentFilm;
+  const {title, poster, backgroundImage} = currentFilm;
 
   return (
     <section className="movie-card movie-card--full">
       <div className="movie-card__header">
         <div className="movie-card__bg">
-          <img src={previewImage} alt={title} />
+          <img src={backgroundImage} alt={title} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
 
         <header className="page-header">
-          <div className="logo">
-            <Link to="/" className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </Link>
-          </div>
+          <Logo />
 
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
@@ -40,20 +38,15 @@ const AddReviewScreen = ({textReview, handleSubmit, handleTextChange, handleStar
             </ul>
           </nav>
 
-          <div className="user-block">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-            </div>
-          </div>
+          <UserBlock />
         </header>
 
         <div className="movie-card__poster movie-card__poster--small">
-          <img src={previewImage} alt={title} width="218" height="327" />
+          <img src={poster} alt={title} width="218" height="327" />
         </div>
       </div>
-
       <div className="add-review">
-        <form action="#" className="add-review__form" onSubmit={handleSubmit}>
+        <form action="" className={`add-review__form ${errorShake ? `shake` : ``} `} onSubmit={handleSubmit}>
           <div className="rating">
             <div className="rating__stars">
               <input className="rating__input" id="star-1" type="radio" name="rating" value="1" onChange={handleStarClick}/>
@@ -75,9 +68,10 @@ const AddReviewScreen = ({textReview, handleSubmit, handleTextChange, handleStar
 
           <div className="add-review__text">
             <textarea className="add-review__textarea" value={textReview} name="review-text" id="review-text" placeholder="Review text"
-              onChange={handleTextChange} />
+              onChange={handleTextChange}
+              disabled={disabledTextArea} />
             <div className="add-review__submit">
-              <button className="add-review__btn" type="submit">Post</button>
+              <button className="add-review__btn" disabled={disabledButton} type="submit">Post</button>
             </div>
 
           </div>
@@ -97,6 +91,21 @@ AddReviewScreen.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   handleTextChange: PropTypes.func.isRequired,
   handleStarClick: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
+  disabledButton: PropTypes.bool.isRequired,
+  disabledTextArea: PropTypes.bool.isRequired,
+  errorShake: PropTypes.bool.isRequired,
 };
 
-export default withAddReviewScreen(AddReviewScreen);
+const mapStateToProps = ({APP_PROCESS}) => ({
+  films: APP_PROCESS.films,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onSubmit: (ratingStarsChecked, textReview, id) => {
+    return dispatch(postReview(ratingStarsChecked, textReview, id));
+
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withAddReviewScreen(AddReviewScreen));

@@ -4,32 +4,14 @@ import {Link} from "react-router-dom";
 import {filmType} from "../../types/film";
 import Tabs from "../tabs/tabs";
 import ButtonPlayVideo from "../button-play-video/button-play-video";
+import UserBlock from "../user-block/user-block";
+import MyListButton from "../my-list-button/my-list-button";
+import Logo from "../logo/logo";
+import {LIKE_FILMS_MAX} from "../../const";
+import FilmCard from '../film-card/film-card';
 
-const LIKE_FILMS_MAX = 4;
 
-
-const createMoreLikeTemplate = (likeFilms) => {
-  return (
-    <React.Fragment>
-      {Object.values(likeFilms.map((film, i) => {
-        const {id, previewImage, title} = film;
-        return (
-          <article className="small-movie-card catalog__movies-card" key={i}>
-            <div className="small-movie-card__image">
-              <img src={previewImage} alt={title} />
-            </div>
-            <h3 className="small-movie-card__title">
-              <Link className="small-movie-card__link" to={`/films/${id}`}>{title}</Link>
-            </h3>
-          </article>
-        );
-      }))}
-
-    </React.Fragment>
-  );
-};
-
-const FilmScreen = ({films, match, handleButtonPlayVideo}) => {
+const FilmScreen = ({films, match, handleButtonPlayVideo, onFilmCardClick}) => {
 
   const id = Number(match.params.id);
   const currentFilm = films.find((film) => film.id === id);
@@ -50,19 +32,9 @@ const FilmScreen = ({films, match, handleButtonPlayVideo}) => {
           <h1 className="visually-hidden">WTW</h1>
 
           <header className="page-header movie-card__head">
-            <div className="logo">
-              <a href="main.html" className="logo__link">
-                <span className="logo__letter logo__letter--1">W</span>
-                <span className="logo__letter logo__letter--2">T</span>
-                <span className="logo__letter logo__letter--3">W</span>
-              </a>
-            </div>
+            <Logo />
 
-            <div className="user-block">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </div>
+            <UserBlock />
           </header>
 
           <div className="movie-card__wrap">
@@ -76,12 +48,8 @@ const FilmScreen = ({films, match, handleButtonPlayVideo}) => {
               <div className="movie-card__buttons">
                 <ButtonPlayVideo id={id} handleButtonPlayVideo={handleButtonPlayVideo} />
 
-                <button className="btn btn--list movie-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
+
+                <MyListButton film={currentFilm} />
                 <Link className="btn movie-card__button" to={`/films/${id}/review`}>Add review</Link>
               </div>
             </div>
@@ -110,19 +78,15 @@ const FilmScreen = ({films, match, handleButtonPlayVideo}) => {
 
           <div className="catalog__movies-list">
 
-            {createMoreLikeTemplate(likeFilms)}
+            {likeFilms.map((film) => (
+              <FilmCard key={film.id} film={film} onFilmCardClick={onFilmCardClick} />
+            ))}
 
           </div>
         </section>
 
         <footer className="page-footer">
-          <div className="logo">
-            <a href="main.html" className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
+          <Logo isFooter={true} />
 
           <div className="copyright">
             <p>© 2019 What to watch Ltd.</p>

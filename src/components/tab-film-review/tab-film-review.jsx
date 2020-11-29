@@ -6,6 +6,7 @@ import {fetchReviews} from "../../store/api-action";
 import {connect} from "react-redux";
 
 const createReviewTemplate = (reviews) => {
+
   return (
     <React.Fragment>
       {Object.values(reviews.map((review, i) => {
