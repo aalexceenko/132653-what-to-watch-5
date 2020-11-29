@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should TabFilmReview render correctly 1`] = `
+<div
+  className="movie-card__reviews movie-card__row"
+>
+  <div
+    className="movie-card__reviews-col"
+  >
+    <div
+      className="review"
+    >
+      <blockquote
+        className="review__quote"
+      >
+        <p
+          className="review__text"
+        />
+        <footer
+          className="review__details"
+        >
+          <cite
+            className="review__author"
+          />
+          <time
+            className="review__date"
+            dateTime="2016-12-24"
+          >
+            October 9, 2020
+          </time>
+        </footer>
+      </blockquote>
+      <div
+        className="review__rating"
+      >
+        3.3
+      </div>
+    </div>
+  </div>
+  <div
+    className="movie-card__reviews-col"
+  >
+    <div
+      className="review"
+    >
+      <blockquote
+        className="review__quote"
+      >
+        <p
+          className="review__text"
+        />
+        <footer
+          className="review__details"
+        >
+          <cite
+            className="review__author"
+          />
+          <time
+            className="review__date"
+            dateTime="2016-12-24"
+          >
+            October 9, 2020
+          </time>
+        </footer>
+      </blockquote>
+      <div
+        className="review__rating"
+      >
+        3.3
+      </div>
+    </div>
+  </div>
+</div>
+`;

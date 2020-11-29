@@ -79,6 +79,6 @@ const mapStateToProps = ({APP_PROCESS}) => ({
   filmPromo: APP_PROCESS.filmPromo,
 });
 
-
+export {App};
 export default connect(mapStateToProps)(App);
 

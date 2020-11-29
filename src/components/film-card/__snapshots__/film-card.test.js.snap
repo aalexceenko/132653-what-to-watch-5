@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should FilmCard render correctly 1`] = `
+<article
+  className="small-movie-card catalog__movies-card"
+  onClick={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+>
+  <div
+    className="small-movie-card__image"
+  >
+    <video
+      height="175"
+      muted={true}
+      poster="https://assets.htmlacademy.ru/intensives/javascript-3/film/preview/bronson.jpg"
+      src="https://upload.wikimedia.org/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
+      width="280"
+    />
+  </div>
+  <h3
+    className="small-movie-card__title"
+  >
+    <a
+      className="small-movie-card__link"
+      href="/films/3"
+      onClick={[Function]}
+    >
+      Bronson
+    </a>
+  </h3>
+</article>
+`;

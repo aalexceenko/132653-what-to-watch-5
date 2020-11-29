@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should App render correctly 1`] = `
+<GeneralPage
+  filmPromo={
+    Object {
+      "actors": Array [
+        "Tom Hardy",
+        "Kelly Adams",
+        "Luing Andrews",
+      ],
+      "backgroundImage": "https://assets.htmlacademy.ru/intensives/javascript-3/film/background/bronson.jpg",
+      "comments": false,
+      "description": "A young man who was sentenced to seven years",
+      "director": "Nicolas Winding Refn",
+      "genre": "Action",
+      "id": 3,
+      "myList": false,
+      "poster": "https://assets.htmlacademy.ru/intensives/javascript-3/film/poster/bronson.jpg",
+      "previewImage": "https://assets.htmlacademy.ru/intensives/javascript-3/film/preview/bronson.jpg",
+      "previewVideo": "https://upload.wikimedia.org/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm",
+      "rating": 3.6,
+      "ratingText": "Normal",
+      "runtime": 92,
+      "title": "Bronson",
+      "trailer": "http://media.xiph.org/mango/tears_of_steel_1080p.webm",
+      "votes": 109661,
+      "year": 2008,
+    }
+  }
+  films={
+    Array [
+      Object {
+        "actors": Array [
+          "Tom Hardy",
+          "Kelly Adams",
+          "Luing Andrews",
+        ],
+        "backgroundImage": "https://assets.htmlacademy.ru/intensives/javascript-3/film/background/bronson.jpg",
+        "comments": false,
+        "description": "A young man who was sentenced to seven years",
+        "director": "Nicolas Winding Refn",
+        "genre": "Action",
+        "id": 1,
+        "myList": false,
+        "poster": "https://assets.htmlacademy.ru/intensives/javascript-3/film/poster/bronson.jpg",
+        "previewImage": "https://assets.htmlacademy.ru/intensives/javascript-3/film/preview/bronson.jpg",
+        "previewVideo": "https://upload.wikimedia.org/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm",
+        "rating": 3.6,
+        "ratingText": "Normal",
+        "runtime": 92,
+        "title": "Bronson",
+        "trailer": "http://media.xiph.org/mango/tears_of_steel_1080p.webm",
+        "votes": 109661,
+        "year": 2008,
+      },
+      Object {
+        "actors": Array [
+          "Tom Hardy",
+          "Kelly Adams",
+          "Luing Andrews",
+        ],
+        "backgroundImage": "https://assets.htmlacademy.ru/intensives/javascript-3/film/background/bronson.jpg",
+        "comments": false,
+        "description": "A young man who was",
+        "director": "Nicolas Winding Refn",
+        "genre": "Action",
+        "id": 2,
+        "myList": false,
+        "poster": "https://assets.htmlacademy.ru/intensives/javascript-3/film/poster/bronson.jpg",
+        "previewImage": "https://assets.htmlacademy.ru/intensives/javascript-3/film/preview/bronson.jpg",
+        "previewVideo": "https://upload.wikimedia.org/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm",
+        "rating": 3.6,
+        "ratingText": "Normal",
+        "runtime": 92,
+        "title": "Bronson",
+        "trailer": "http://media.xiph.org/mango/tears_of_steel_1080p.webm",
+        "votes": 109661,
+        "year": 2008,
+      },
+    ]
+  }
+  handleButtonPlayVideo={[Function]}
+  onFilmCardClick={[Function]}
+/>
+`;

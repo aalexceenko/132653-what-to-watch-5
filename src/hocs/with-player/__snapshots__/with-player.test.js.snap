@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`withPlayer is rendered correctly 1`] = `
+<div>
+  <video
+    className="player__video"
+    muted={true}
+    onTimeUpdate={[Function]}
+    poster="https://assets.htmlacademy.ru/intensives/javascript-3/film/poster/bronson.jpg"
+  />
+</div>
+`;

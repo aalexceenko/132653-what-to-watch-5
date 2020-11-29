@@ -26,5 +26,5 @@ const mapStateToProps = ({USER}) => ({
   authorizationStatus: USER.authorizationStatus,
 });
 
-
+export {UserBlock};
 export default connect(mapStateToProps)(UserBlock);

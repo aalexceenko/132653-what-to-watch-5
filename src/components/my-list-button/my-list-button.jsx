@@ -42,6 +42,6 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-
+export {MyListButton};
 export default connect(null, mapDispatchToProps)(withMyListButton(MyListButton));
 
