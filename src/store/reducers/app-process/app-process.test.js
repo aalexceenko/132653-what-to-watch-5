@@ -1,11 +1,12 @@
 import {ActionType} from "../../action";
 import {appProcess} from "./app-process";
-import {GENRES, VISIBLE_FILMS_COUNT, FILMS, FILM, REVIEWS, ID} from "../../../test-mock";
+import {GENRES, VISIBLE_FILMS_COUNT, REVIEWS, ID} from "../../../test-mock";
 import {createAPI} from "../../../services/api";
 import MockAdapter from "axios-mock-adapter";
 import {fetchFilms, fetchFilmPromo, fetchReviews, postReview, changeMyList} from "../../api-action";
 import {APIRoute} from "../../../const";
 import {adaptFilmsToClient} from "../../../services/adapter";
+import {getFilmRank} from "../../../utils";
 
 const mockInitialState = {
   activeGenre: `All genres`,
@@ -14,6 +15,49 @@ const mockInitialState = {
   filmPromo: [],
   visibleFilmsCount: VISIBLE_FILMS_COUNT,
 };
+
+export const FILMS = [
+  {
+    description: `A young man who was sentenced to seven years`,
+    rating: 3.6,
+    director: `Nicolas Winding Refn`,
+    genre: `Action`,
+    starring: [`Tom Hardy`, `Kelly Adams`, `Luing Andrews`],
+    id: 1,
+    title: `Bronson`,
+    poster: `https://assets.htmlacademy.ru/intensives/javascript-3/film/poster/bronson.jpg`,
+    previewImage: `https://assets.htmlacademy.ru/intensives/javascript-3/film/preview/bronson.jpg`,
+    backgroundImage: `https://assets.htmlacademy.ru/intensives/javascript-3/film/background/bronson.jpg`,
+    previewVideo: `https://upload.wikimedia.org/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+    trailer: `http://media.xiph.org/mango/tears_of_steel_1080p.webm`,
+    votes: 109661,
+    runtime: 92,
+    year: 2008,
+    ratingText: getFilmRank(3.6),
+    myList: false,
+    comments: false,
+  },
+  {
+    description: `A young man who was`,
+    rating: 3.6,
+    director: `Nicolas Winding Refn`,
+    genre: `Action`,
+    starring: [`Tom Hardy`, `Kelly Adams`, `Luing Andrews`],
+    id: 2,
+    title: `Bronson`,
+    poster: `https://assets.htmlacademy.ru/intensives/javascript-3/film/poster/bronson.jpg`,
+    previewImage: `https://assets.htmlacademy.ru/intensives/javascript-3/film/preview/bronson.jpg`,
+    backgroundImage: `https://assets.htmlacademy.ru/intensives/javascript-3/film/background/bronson.jpg`,
+    previewVideo: `https://upload.wikimedia.org/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+    trailer: `http://media.xiph.org/mango/tears_of_steel_1080p.webm`,
+    votes: 109661,
+    runtime: 92,
+    year: 2008,
+    ratingText: getFilmRank(3.6),
+    myList: false,
+    comments: false,
+  },
+];
 
 const api = createAPI(() => {});
 
@@ -67,9 +111,9 @@ it(`Reducer should update promo by load film promo`, () => {
     filmPromo: [],
   }, {
     type: ActionType.LOAD_FILM_PROMO,
-    payload: FILM,
+    payload: FILMS[0],
   })).toEqual({
-    filmPromo: FILM,
+    filmPromo: FILMS[0],
   });
 });
 
@@ -99,18 +143,18 @@ describe(`Async operation work correctly`, () => {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
     const filmPromoLoader = fetchFilmPromo();
-    // const filmsFromServer = adaptFilmsToClient(FILM);
+    const filmsFromServer = adaptFilmsToClient(FILMS[0]);
 
     apiMock
       .onGet(APIRoute.FILM_PROMO)
-      .reply(200, FILM);
+      .reply(200, FILMS[0]);
 
     return filmPromoLoader(dispatch, () => {}, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_FILM_PROMO,
-          payload: FILM,
+          payload: filmsFromServer,
         });
       });
   });
@@ -138,7 +182,7 @@ describe(`Async operation work correctly`, () => {
   it(`Should make a correct API call to POST /comments/:id`, () => {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
-    const postReviewLoader = postReview(ID, {rating: `3`, comment: `comment`});
+    const postReviewLoader = postReview(`3`, `comment`, ID);
 
     apiMock
       .onPost(`/comments/${ID}`, {rating: `3`, comment: `comment`})
@@ -153,16 +197,15 @@ describe(`Async operation work correctly`, () => {
   it(`Should make a correct API call to /favorite/:film_id/:status`, () => {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
-    const sendFavStatusLoader = changeMyList(ID, true);
-    // const filmFromServer = adaptFilmsToClient(FILM);
+    const sendFavStatusLoader = changeMyList(ID, 1);
 
     apiMock
       .onPost(`/favorite/${ID}/1`)
-      .reply(200, FILM);
+      .reply(200, FILMS[0]);
 
     return sendFavStatusLoader(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenCalledTimes(2);
       });
   });
 });

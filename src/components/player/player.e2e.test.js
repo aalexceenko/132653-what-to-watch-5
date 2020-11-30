@@ -1,5 +1,5 @@
 import React from "react";
-import {configure, mount, shallow} from "enzyme";
+import {configure, mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import Player from "./player";
 import {TITLE, VIDEO_CURRENT_TIME, PROGRESS_POSITION} from "../../test-mock";
@@ -11,7 +11,32 @@ describe(`Player callback should be called on`, () => {
   it(`Play button click`, () => {
     const handlePlayerPlayClick = jest.fn();
 
-    const wrapper = shallow(
+    const wrapper = mount(
+        <BrowserRouter >
+          <Player
+            isPlaying={false}
+            videoCurrentTime={VIDEO_CURRENT_TIME}
+            progressPosition={PROGRESS_POSITION}
+            title={TITLE}
+            handlePlayerExitClick={() => {}}
+            handlePlayerFullScreenClick={() => {}}
+            handlePlayerPlayClick={handlePlayerPlayClick}
+            handlePlayerPauseClick={() => {}}
+          >
+            <React.Fragment />
+          </Player>
+        </BrowserRouter>
+    );
+
+    const playButton = wrapper.find(`.player__play`);
+    playButton.simulate(`click`);
+    expect(handlePlayerPlayClick).toHaveBeenCalledTimes(1);
+  });
+
+  it(`Pause button click`, () => {
+    const handlePlayerPauseClick = jest.fn();
+
+    const wrapper = mount(
         <BrowserRouter >
           <Player
             isPlaying={true}
@@ -20,15 +45,42 @@ describe(`Player callback should be called on`, () => {
             title={TITLE}
             handlePlayerExitClick={() => {}}
             handlePlayerFullScreenClick={() => {}}
-            handlePlayerPlayClick={handlePlayerPlayClick}
-            handlePlayerPauseClick={() => {}}
-          />
+            handlePlayerPlayClick={() => {}}
+            handlePlayerPauseClick={handlePlayerPauseClick}
+          >
+            <React.Fragment />
+          </Player>
         </BrowserRouter>
     );
 
     const playButton = wrapper.find(`.player__play`);
     playButton.simulate(`click`);
-    expect(handlePlayerPlayClick).toHaveBeenCalledTimes(1);
+    expect(handlePlayerPauseClick).toHaveBeenCalledTimes(1);
+  });
+
+  it(`Exit button click`, () => {
+    const handlePlayerExitClick = jest.fn();
+
+    const wrapper = mount(
+        <BrowserRouter >
+          <Player
+            isPlaying={true}
+            videoCurrentTime={VIDEO_CURRENT_TIME}
+            progressPosition={PROGRESS_POSITION}
+            title={TITLE}
+            handlePlayerExitClick={handlePlayerExitClick}
+            handlePlayerFullScreenClick={() => {}}
+            handlePlayerPlayClick={() => {}}
+            handlePlayerPauseClick={() => {}}
+          >
+            <React.Fragment />
+          </Player>
+        </BrowserRouter>
+    );
+
+    const playButton = wrapper.find(`.player__exit`);
+    playButton.simulate(`click`);
+    expect(handlePlayerExitClick).toHaveBeenCalledTimes(1);
   });
 
   it(`FullScreen button click`, () => {
@@ -45,7 +97,9 @@ describe(`Player callback should be called on`, () => {
             handlePlayerFullScreenClick={handlePlayerFullScreenClick}
             handlePlayerPlayClick={() => {}}
             handlePlayerPauseClick={() => {}}
-          />
+          >
+            <React.Fragment />
+          </Player>
         </BrowserRouter>
     );
 

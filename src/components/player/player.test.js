@@ -45,8 +45,9 @@ describe(`Should Player render correctly`, () => {
             handlePlayerFullScreenClick={() => {}}
             handlePlayerPlayClick={() => {}}
             handlePlayerPauseClick={() => {}}
-          />
-          <React.Fragment />
+          >
+            <React.Fragment />
+          </Player>
         </BrowserRouter>
 
       ), {
