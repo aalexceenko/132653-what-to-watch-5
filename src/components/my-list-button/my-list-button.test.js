@@ -1,22 +1,38 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import {MyListButton} from "./my-list-button";
-import {IS_IN_MY_LIST} from "../../test-mock";
 import {BrowserRouter} from 'react-router-dom';
 
+describe(`Should MyListButton render correctly`, () => {
+  it(`in my list`, () => {
+    const tree = renderer
+      .create(
+          <BrowserRouter >
+            <MyListButton
+              handleClick={() => {}}
+              isInMyList={true}
+            />
+          </BrowserRouter>
 
-it(`Should MyListButton render correctly`, () => {
-  const tree = renderer
-    .create(
-        <BrowserRouter >
-          <MyListButton
-            handleClick={() => {}}
-            isInMyList={IS_IN_MY_LIST}
-          />
-        </BrowserRouter>
+      )
+      .toJSON();
 
-    )
-    .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 
-  expect(tree).toMatchSnapshot();
+  it(`not in my list`, () => {
+    const tree = renderer
+      .create(
+          <BrowserRouter >
+            <MyListButton
+              handleClick={() => {}}
+              isInMyList={false}
+            />
+          </BrowserRouter>
+
+      )
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
 });
