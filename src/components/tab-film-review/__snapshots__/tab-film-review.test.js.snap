@@ -15,13 +15,17 @@ exports[`Should TabFilmReview render correctly 1`] = `
       >
         <p
           className="review__text"
-        />
+        >
+          This film is an experience and i has already seen it 4 times
+        </p>
         <footer
           className="review__details"
         >
           <cite
             className="review__author"
-          />
+          >
+            Christina
+          </cite>
           <time
             className="review__date"
             dateTime="2016-12-24"
@@ -48,13 +52,17 @@ exports[`Should TabFilmReview render correctly 1`] = `
       >
         <p
           className="review__text"
-        />
+        >
+          This film is an experience and i has already seen it 4 times
+        </p>
         <footer
           className="review__details"
         >
           <cite
             className="review__author"
-          />
+          >
+            Christina
+          </cite>
           <time
             className="review__date"
             dateTime="2016-12-24"

@@ -1,6 +1,6 @@
 import {getFilmRank} from "./utils";
 
-export const VISIBLE_FILMS_COUNT = 16;
+export const VISIBLE_FILMS_COUNT = 8;
 export const ID = 1;
 export const VIDEO_CURRENT_TIME = 0;
 export const PROGRESS_POSITION = 0;
@@ -27,7 +27,7 @@ export const FILMS = [
     rating: 3.6,
     director: `Nicolas Winding Refn`,
     genre: `Action`,
-    actors: [`Tom Hardy`, `Kelly Adams`, `Luing Andrews`],
+    starring: [`Tom Hardy`, `Kelly Adams`, `Luing Andrews`],
     id: 1,
     title: `Bronson`,
     poster: `https://assets.htmlacademy.ru/intensives/javascript-3/film/poster/bronson.jpg`,
@@ -47,7 +47,7 @@ export const FILMS = [
     rating: 3.6,
     director: `Nicolas Winding Refn`,
     genre: `Action`,
-    actors: [`Tom Hardy`, `Kelly Adams`, `Luing Andrews`],
+    starring: [`Tom Hardy`, `Kelly Adams`, `Luing Andrews`],
     id: 2,
     title: `Bronson`,
     poster: `https://assets.htmlacademy.ru/intensives/javascript-3/film/poster/bronson.jpg`,
@@ -89,13 +89,19 @@ export const REVIEWS = [
   {
     rating: 3.3,
     date: `2020-10-09T13:38:44.769Z`,
-    user: `Christina`,
-    message: `This film is an experience and i has already seen it 4 times`,
+    user: {
+      name: `Christina`,
+      id: 1,
+    },
+    comment: `This film is an experience and i has already seen it 4 times`,
   },
   {
     rating: 3.3,
     date: `2020-10-09T13:38:44.769Z`,
-    user: `Christina`,
-    message: `This film is an experience and i has already seen it 4 times`,
+    user: {
+      name: `Christina`,
+      id: 2,
+    },
+    comment: `This film is an experience and i has already seen it 4 times`,
   }
 ];

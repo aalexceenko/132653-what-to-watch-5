@@ -1,5 +1,5 @@
 import React from "react";
-import {configure, mount} from "enzyme";
+import {configure, mount, shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import Player from "./player";
 import {TITLE, VIDEO_CURRENT_TIME, PROGRESS_POSITION} from "../../test-mock";
@@ -11,7 +11,7 @@ describe(`Player callback should be called on`, () => {
   it(`Play button click`, () => {
     const handlePlayerPlayClick = jest.fn();
 
-    const wrapper = mount(
+    const wrapper = shallow(
         <BrowserRouter >
           <Player
             isPlaying={true}

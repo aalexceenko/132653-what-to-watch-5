@@ -7,46 +7,53 @@ import {BrowserRouter} from 'react-router-dom';
 describe(`Should Player render correctly`, () => {
   it(`Playing`, () => {
     const tree = renderer
-      .create(
-          <BrowserRouter >
-            <Player
-              isPlaying={true}
-              videoCurrentTime={VIDEO_CURRENT_TIME}
-              progressPosition={PROGRESS_POSITION}
-              title={TITLE}
-              handlePlayerExitClick={() => {}}
-              handlePlayerFullScreenClick={() => {}}
-              handlePlayerPlayClick={() => {}}
-              handlePlayerPauseClick={() => {}}
-            />
+      .create((
+        <BrowserRouter >
+          <Player
+            isPlaying={true}
+            videoCurrentTime={VIDEO_CURRENT_TIME}
+            progressPosition={PROGRESS_POSITION}
+            title={TITLE}
+            handlePlayerExitClick={() => {}}
+            handlePlayerFullScreenClick={() => {}}
+            handlePlayerPlayClick={() => {}}
+            handlePlayerPauseClick={() => {}}
+          >
             <React.Fragment />
-          </BrowserRouter>
+          </Player>
+        </BrowserRouter>
 
-      )
-      .toJSON();
+      ), {
+        createNodeMock: () => {
+          return {};
+        }
+      }).toJSON();
 
     expect(tree).toMatchSnapshot();
   });
 
   it(`On pause`, () => {
     const tree = renderer
-      .create(
-          <BrowserRouter >
-            <Player
-              isPlaying={false}
-              videoCurrentTime={VIDEO_CURRENT_TIME}
-              progressPosition={PROGRESS_POSITION}
-              title={TITLE}
-              handlePlayerExitClick={() => {}}
-              handlePlayerFullScreenClick={() => {}}
-              handlePlayerPlayClick={() => {}}
-              handlePlayerPauseClick={() => {}}
-            />
-            <React.Fragment />
-          </BrowserRouter>
+      .create((
+        <BrowserRouter >
+          <Player
+            isPlaying={false}
+            videoCurrentTime={VIDEO_CURRENT_TIME}
+            progressPosition={PROGRESS_POSITION}
+            title={TITLE}
+            handlePlayerExitClick={() => {}}
+            handlePlayerFullScreenClick={() => {}}
+            handlePlayerPlayClick={() => {}}
+            handlePlayerPauseClick={() => {}}
+          />
+          <React.Fragment />
+        </BrowserRouter>
 
-      )
-      .toJSON();
+      ), {
+        createNodeMock: () => {
+          return {};
+        }
+      }).toJSON();
 
     expect(tree).toMatchSnapshot();
   });
