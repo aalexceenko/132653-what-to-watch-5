@@ -8,7 +8,7 @@ import FilmCard from '../film-card/film-card';
 
 const MyListScreen = ({films, onFilmCardClick}) => {
 
-  let myListFilms = films.filter((film) => (film.myList === true));
+  const myListFilms = films.filter((film) => (film.myList === true));
 
   return (
     <div className="user-page">

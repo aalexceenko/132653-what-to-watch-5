@@ -22,9 +22,9 @@ npm i react@16.12 -E
 
 ## devDependencies
 
-* @babel/core@7.8
-* @babel/preset-env@7.8
-* @babel/preset-react@7.8
+* @babel/core@7.12.3
+* @babel/preset-env@7.12.1
+* @babel/preset-react@7.12.5
 * @types/jest@25.1
 * @types/react@16.9
 * axios-mock-adapter@1.17

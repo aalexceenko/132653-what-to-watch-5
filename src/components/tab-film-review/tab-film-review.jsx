@@ -87,4 +87,5 @@ const mapDispatchToProps = (dispatch) => ({
   }
 });
 
+export {TabFilmReview};
 export default connect(mapStateToProps, mapDispatchToProps)(TabFilmReview);

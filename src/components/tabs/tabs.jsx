@@ -34,4 +34,5 @@ Tabs.propTypes = {
   renderContentForTab: PropTypes.func.isRequired,
 };
 
+export {Tabs};
 export default withTabs(Tabs);

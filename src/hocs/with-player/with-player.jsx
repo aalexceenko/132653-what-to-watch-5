@@ -21,12 +21,18 @@ const withPlayer = (Component) => {
       this._handlePlayerPlayClick = this._handlePlayerPlayClick.bind(this);
       this._handlePlayerPauseClick = this._handlePlayerPauseClick.bind(this);
       this._handleVideoTimeUpdate = this._handleVideoTimeUpdate.bind(this);
-
     }
 
     _handlePlayerFullScreenClick() {
       const video = this._videoRef.current;
-      video.requestFullscreen();
+
+      if (video.requestFullscreen) {
+        video.requestFullscreen();
+      } else if (video.webkitRequestFullscreen) { /* Safari */
+        video.webkitRequestFullscreen();
+      } else if (video.msRequestFullscreen) { /* IE11 */
+        video.msRequestFullscreen();
+      }
     }
 
     _handlePlayerPlayClick() {

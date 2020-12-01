@@ -9,7 +9,7 @@ const withMyListButton = (Component) => {
       super(props);
 
       this.state = {
-        myList: this.props.film.myList,
+        isInMyList: this.props.film.myList,
       };
 
       this._handleClick = this._handleClick.bind(this);
@@ -18,9 +18,9 @@ const withMyListButton = (Component) => {
     _handleClick() {
 
       this.setState({
-        myList: !this.props.film.myList,
+        isInMyList: !this.props.film.myList,
       });
-      this.props.changeMyListAction(this.props.film.id, Number(!this.state.myList));
+      this.props.changeMyListAction(this.props.film.id, Number(!this.state.isInMyList));
     }
 
     render() {
@@ -29,7 +29,7 @@ const withMyListButton = (Component) => {
         <Component
           {...this.props}
           handleClick={this._handleClick}
-          myList={this.state.myList}
+          isInMyList={this.state.isInMyList}
         />
       );
     }

@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should VideoPlayer render correctly 1`] = `
+<video
+  height="175"
+  muted={true}
+  poster="img/aviator.jpg"
+  src="https://upload.wikimedia.org/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
+  width="280"
+/>
+`;

@@ -42,4 +42,5 @@ FilmCard.propTypes = {
   playVideo: PropTypes.func.isRequired,
 };
 
+export {FilmCard};
 export default withFilmCard(FilmCard);

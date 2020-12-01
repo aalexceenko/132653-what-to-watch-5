@@ -76,4 +76,5 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
+export {PromoFilm};
 export default connect(mapStateToProps, mapDispatchToProps)(PromoFilm);

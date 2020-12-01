@@ -37,7 +37,7 @@ export const postReview = (ratingStarsChecked, textReview, id) => (dispatch, _ge
 };
 
 export const changeMyList = (id, status) => (dispatch, _getState, axios) => {
-  axios.post(`/favorite/${id}/${status}`)
+  return axios.post(`/favorite/${id}/${status}`)
     .then(() => dispatch(fetchFilms()))
     .then(() => dispatch(fetchFilmPromo()))
     .catch(() => {});
