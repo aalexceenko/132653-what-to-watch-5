@@ -23,30 +23,6 @@ const withPlayer = (Component) => {
       this._handleVideoTimeUpdate = this._handleVideoTimeUpdate.bind(this);
     }
 
-    _handlePlayerFullScreenClick() {
-      const video = this._videoRef.current;
-
-      if (video.requestFullscreen) {
-        video.requestFullscreen();
-      } else if (video.webkitRequestFullscreen) { /* Safari */
-        video.webkitRequestFullscreen();
-      } else if (video.msRequestFullscreen) { /* IE11 */
-        video.msRequestFullscreen();
-      }
-    }
-
-    _handlePlayerPlayClick() {
-      this.setState({
-        isPlaying: true,
-      });
-    }
-
-    _handlePlayerPauseClick() {
-      this.setState({
-        isPlaying: false,
-      });
-    }
-
     componentDidMount() {
       const {films, match} = this.props;
       const video = this._videoRef.current;
@@ -86,6 +62,30 @@ const withPlayer = (Component) => {
         progressPosition: getVideoProgress(video),
       });
 
+    }
+
+    _handlePlayerFullScreenClick() {
+      const video = this._videoRef.current;
+
+      if (video.requestFullscreen) {
+        video.requestFullscreen();
+      } else if (video.webkitRequestFullscreen) { /* Safari */
+        video.webkitRequestFullscreen();
+      } else if (video.msRequestFullscreen) { /* IE11 */
+        video.msRequestFullscreen();
+      }
+    }
+
+    _handlePlayerPlayClick() {
+      this.setState({
+        isPlaying: true,
+      });
+    }
+
+    _handlePlayerPauseClick() {
+      this.setState({
+        isPlaying: false,
+      });
     }
 
     render() {

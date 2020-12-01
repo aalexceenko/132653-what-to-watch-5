@@ -15,6 +15,11 @@ export const AuthorizationStatus = {
   NO_AUTH: `NO_AUTH`,
 };
 
+export const CountLettersText = {
+  MIN: 50,
+  MAX: 400,
+};
+
 export const RatingFilms = {
   BAD: 0,
   NORMAL: 3,
@@ -24,6 +29,8 @@ export const RatingFilms = {
 };
 
 export const SEC_PER_MINUTE = 60;
+
+export const MINUTE_IN_HOUR = 60;
 
 export const SHAKE_ANIMATION_TIMEOUT = 600;
 

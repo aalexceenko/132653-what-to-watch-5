@@ -1,10 +1,10 @@
 import moment from 'moment';
-import {ALL_GENRES, RatingFilms, SEC_PER_MINUTE, MAX_COUNT_GENRES} from "./const";
+import {ALL_GENRES, RatingFilms, SEC_PER_MINUTE, MAX_COUNT_GENRES, CountLettersText, MINUTE_IN_HOUR} from "./const";
 
 
 export const getDuration = (minutes) => {
   const duration = moment.duration(minutes, `minutes`);
-  const format = minutes > 60 ? `H[h] mm[m]` : `mm[m]`;
+  const format = minutes > MINUTE_IN_HOUR ? `H[h] mm[m]` : `mm[m]`;
   return moment.utc(duration.as(`milliseconds`)).format(format).toString();
 };
 export const getDateRevieFormat = (date) => moment(date).format(`LL`);
@@ -64,5 +64,5 @@ export const getFilmRank = (count) => {
   }
 };
 
-export const checkTextValidation = (text) => !(text.length >= 50 && text.length <= 400);
+export const checkTextValidation = (text) => !(text.length >= CountLettersText.MIN && text.length <= CountLettersText.MAX);
 
